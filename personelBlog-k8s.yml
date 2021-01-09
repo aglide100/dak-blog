@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personelBlog-postgresql
+  labels:
+    app: personelBlog
+spec:
+  selector:
+    matchLabels:
+      app: personelBlog
+      tier: postgresql
+  template:
+    metadata:
+      labels:
+        app: personelBlog
+        tier: postgresql
+    spec:
+      containers:
+        - image: postgresql:5.6
+          name: postgresql
+          env:
+            - name: postgresql_ROOT_PASSWORD
+              value: password
+          ports:
+            - containerPort: 5432
+              name: postgresql
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: personelBlog-postgresql
+  labels:
+    app: personelBlog
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: personelBlog
+    tier: postgresql
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personelBlog
+  labels:
+    app: personelBlog
+spec:
+  selector:
+    matchLabels:
+      app: personelBlog
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: personelBlog
+        tier: frontend
+    spec:
+      containers:
+        - image: personelBlog:5.5.3-apache
+          name: personelBlog
+          env:
+            - name: personelBlog_DB_HOST
+              value: personelBlog-postgresql
+            - name: personelBlog_DB_PASSWORD
+              value: password
+          ports:
+            - containerPort: 80
+              name: personelBlog
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: personelBlog
+  labels:
+    app: personelBlog
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+  selector:
+    app: personelBlog
+    tier: frontend
