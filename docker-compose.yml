@@ -12,10 +12,6 @@ services:
             - <<: *services-volume
               source: "../go/cert"
               target: "/usr/share/ca-certificates/"
-
-            - <<: *services-volume
-              source: /${HOST}/app/img
-              target: /var/lib/webd/ui/img
         links: 
             - postgres:app_db
         ports: 

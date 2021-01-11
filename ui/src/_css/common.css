@@ -1,0 +1,37 @@
+@import url('https://rsms.me/inter/inter.css');
+
+:root {
+    --font-family: Inter;
+
+    --color-purple1: #F9F6FE;
+    --color-purple2: #C6B4FA;
+    --color-purple3: #9E83F8;
+    --color-purple4: #8163F6;
+    --color-purple5: #674FC5;
+    --color-purple6: #4D3B94;
+    --color-purple7: #342863;
+
+    --color-gray1: #F6F8F9;
+    --color-gray2: #DCE1E7;
+    --color-gray3: #C4CBD3;
+    --color-gray4: #ADB5BD;
+    --color-gray5: #8A9197;
+    --color-gray6: #686D71;
+    --color-gray7: #45484C;
+    --color-gray8: #232426;
+
+    --color-red: #FA5252;
+
+    --color-orange: #F2994A;
+
+    --color-yellow: #F2C94C;
+
+    --color-green1: #219653;
+    --color-green2: #27AE60;
+    --color-green3: #6FCF97;
+
+    --color-blue1: #2F80ED;
+    --color-blue2: #2D9CDB;
+    --color-blue3: #56CCF2;
+    
+}
