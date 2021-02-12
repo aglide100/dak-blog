@@ -1,7 +1,2 @@
-module.exports = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    console.log(config);
-    config.module.rules.map((rule) => console.log(JSON.stringify(rule)));
-    return config;
-  },
-};
+const withTypescript = require("@zeit/next-typescript");
+module.exports = withTypescript();
