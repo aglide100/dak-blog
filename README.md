@@ -6,12 +6,25 @@ personel-blog
 ## 1. purpose
 made simple web blog 
 ***
-## 2. Using assets
-This project used [golang][golanglink], [stoybook][storybooklink], [postgresql][postgesqlLink]
-and [docker][dockerlink]
+## 2. Dependacy
+
+This project used
+
+> [typescript][typescriptLink]
+
+> [nextJs][nextJslink]
+
+> [golang][golanglink]
+
+> [stoybook][storybooklink]
+
+> [postgresql][postgesqlLink]
+
+>[docker][dockerlink]
 
 
-
+[typescriptLink]:https://www.typescriptlang.org/
+[nextJslink]:https://nextjs.org/
 [golanglink]: https://golang.org/
 [storybooklink]: https://storybook.js.org/
 [postgesqlLink]: https://www.postgresql.org/
