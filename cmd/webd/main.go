@@ -5,8 +5,8 @@ import (
 	"net"
 	"net/http"
 
-	"../../pkg/controllers"
-	"../../pkg/router"
+	"github.com/aglide100/personel-blog/pkg/controllers"
+	"github.com/aglide100/personel-blog/pkg/router"
 )
 
 func main() {

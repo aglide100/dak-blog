@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"../../pkg/views"
+	"github.com/aglide100/personel-blog/pkg/views"
 )
 
 type NotFoundController struct {
