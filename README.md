@@ -1,11 +1,10 @@
 personel-blog
 ===
-### This repo is made personel blog by myself
-#### It is made by self, so something is wrong or have some unnecessary code
-***
+### This repo is make for simple web blog
+#### This blog 
+
 ## 1. purpose
-made simple web blog 
-***
+writing some code 
 ## 2. Dependacy
 
 This project used
