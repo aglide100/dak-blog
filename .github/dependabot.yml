@@ -1,0 +1,13 @@
+version: 2
+update: 
+- package-ecosystem: "npm"
+    directory: "/ui"
+    schedule:
+      interval: "daily"
+    labels:
+      - "update npm"
+    open-pull-requests-limit: 10
+- package-ecosystem: "gomod" 
+    directory: "/"
+    schedule:
+      interval: "daily"
