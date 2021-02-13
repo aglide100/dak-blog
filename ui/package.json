@@ -1,12 +1,13 @@
 {
   "name": "ui",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
     "test": "echo \"Error: no test specified\"",
+    "export": "next export",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
