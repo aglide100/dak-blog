@@ -1,10 +1,9 @@
 personel-blog
 ===
-### This repo is make for simple web blog
-#### This blog 
+### This repo is make simple web blog
 
 ## 1. purpose
-writing some code 
+writing some code or project at blog 
 ## 2. Dependacy
 
 This project used
