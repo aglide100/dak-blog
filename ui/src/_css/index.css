@@ -1,3 +1,7 @@
-@import url('header.css');
-@import url('page.css');
-@import url('button.css');
+@import url("header.css");
+@import url("page.css");
+@import url("button.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
