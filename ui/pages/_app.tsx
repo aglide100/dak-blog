@@ -1,6 +1,8 @@
-// import React from "react"
+import React from "react";
+import { Header } from "../src/components/Header/Header";
+import { Footer } from "../src/components/Footer/Footer";
 // import type { AppProps } from "next/app";
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 // type MyAppProps = {
 //   myAppProps: AppProps;
@@ -9,10 +11,14 @@ import '../styles/globals.css'
 function MyApp() {
   // const { Component, pageProps } = props.myAppProps;
 
-  return <div>
-    Hello you can see MyApp Component
-  </div>
+  return (
+    <div>
+      <Header></Header>
+      Hello!
+      <Footer></Footer>
+    </div>
+  );
   // return <Component {...pageProps} />
 }
 
-export default MyApp
+export default MyApp;
