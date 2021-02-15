@@ -28,23 +28,23 @@ Move the ui directory and
 
 This project used
 
-github CI/CD
+Github CI/CD
 
 > [JamesIves/github-pages-deploy-action][jamesives/github-pages-deploy-actionlinklink]
 
-Css
+CSS
 
 > [tailwindCss][tailwindcsslink]
 
-Ssr framework
+SSR framework
 
 > [nextJs][nextjslink]
 
-Script Language
+Script language
 
 > [typescript][typescriptlink]
 
-Api Server
+API Server
 
 > [golang][golanglink]
 
