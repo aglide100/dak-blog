@@ -4,8 +4,8 @@ export type HeaderProps = {};
 
 export function Header(props: HeaderProps) {
   return (
-    <nav className="w-screen bg-black">
-      <div>Header</div>
+    <nav className="w-screen">
+      <div></div>
     </nav>
   );
 }

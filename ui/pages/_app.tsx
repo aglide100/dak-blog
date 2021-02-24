@@ -1,24 +1,17 @@
 import React from "react";
 import { Header } from "../src/components/Header/Header";
 import { Footer } from "../src/components/Footer/Footer";
-// import type { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import "../styles/globals.css";
 
-// type MyAppProps = {
-//   myAppProps: AppProps;
-// };
-
-function MyApp() {
-  // const { Component, pageProps } = props.myAppProps;
-
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       <Header></Header>
-      Hello!
+      <Component {...pageProps} />
       <Footer></Footer>
     </div>
   );
-  // return <Component {...pageProps} />
 }
 
 export default MyApp;
