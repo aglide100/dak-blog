@@ -3,19 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <style>
-      .path red {
-        stroke: red;
-      }
-      .path blue {
-        stroke: blue;
-      }
-    </style>
+    <style></style>
   </head>
   <body>
     <div id="my_dataviz"></div>
-    <button onclick="stopTick()">stop</button>
-    <button onclick="startTick()">start</button>
 
     <script>
       var margin = { top: 0, right: 0, bottom: 0, left: 0 },
@@ -28,7 +19,6 @@
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
-      var duration = 500;
       const keyMax = 40;
       const maxValue = 30;
 
@@ -114,10 +104,7 @@
           .attr("d", linearGenerator(data))
           .attr("class", colorLabel);
 
-        d3.active(this)
-          .transition()
-          // .attr("class", colorLabel)
-          .on("start", tick);
+        d3.active(this).transition().on("start", tick);
         data.shift();
       }
     </script>
