@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  </head>
+  <body>
+    <div id="my_dataviz"></div>
+    <div>sss</div>
+    <script>
+      // set the dimensions and margins of the graph
+      var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+        width = 800 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+
+      // append the svg object to the body of the page
+      var svg = d3
+        .select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
+
+      //
+      function generatorRandomNumber() {
+        return Math.floor(Math.random() * Math.floor(30));
+      }
+
+      let data = [{ key: 0, value: generatorRandomNumber() }];
+      for (i = 1; i < 800; i++) {
+        data.push({ key: i, value: generatorRandomNumber() });
+      }
+
+      const linearGenerator = d3
+        .line()
+        .x((data) => xScale(data.key))
+        .y((data) => yScale(data.value));
+
+      const xScale = d3.scaleLinear().domain([0, 800]).range([0, 800]);
+      const yScale = d3.scaleLinear().domain([0, 30]).range([0, height]);
+
+      const xAxisSVG = d3
+        .select("svg")
+        .append("g")
+        .attr("transform", "translate(10, 590)");
+      const yAxisSVG = d3.select("svg").append("g");
+
+      const xAxis = d3.axisTop(xScale);
+      const yAxis = d3.axisRight(yScale);
+      xAxis(xAxisSVG);
+      yAxis(yAxisSVG);
+
+      svg
+        .append("path")
+        .attr("data", linearGenerator(data))
+        .attr("fill", "none")
+        .attr("stroke-width", 2)
+        .attr("stroke", "black");
+    </script>
+  </body>
+</html>
