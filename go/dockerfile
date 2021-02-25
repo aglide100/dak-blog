@@ -1,5 +1,7 @@
 FROM golang:1.14 AS builder
 
+WORKDIR ../.
+
 RUN mkdir -p /opt/bin/webd/
 RUN mkdir -p /var/lib/webd/
 

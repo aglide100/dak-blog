@@ -1,58 +1,65 @@
-version : '3.5'
-x-services-volume:
-    &services-volume
-    type: bind  
+version: "3.5"
+x-services-volume: &services-volume
+    type: bind
 
 services:
-    app:
-        container_name: app
-        build: 
-            context: ./go
-        volumes:
-            - <<: *services-volume
-              source: "../go/cert"
-              target: "/usr/share/ca-certificates/"
-        links: 
-            - postgres:app_db
-        ports: 
-            - "443:443"
-            - "80:80"
+    node:
+        container_name: nodejs
+        build:
+            context: ./ui
+        ports:
+            - "80:3000"
         networks:
             - docker_network
-        environment: 
-            LISTEN_ADDR: 0.0.0.0
-            LISTEN_HTTP_PORT: "80"
-            LISTEN_HTTPS_PORT: "443"
-            DB_ADDR: app_db
-            DB_PORT: 5432
-            DB_USER: table_admin
-            DB_PASSWORD: ${USERPWD}
-            DB_NAME: pBlog
-            TLS_CERT_FILEPATH: ${TLS_CERT_FILEPATH}
-            TLS_KEY_FILEPATH: ${TLS_KEY_FILEPATH}
-        depends_on:
-            - postgres
+    # app:
+    #     container_name: app
+    #     build:
+    #         context: ./go
+    #     volumes:
+    #         - <<: *services-volume
+    #           source: "../go/cert"
+    #           target: "/usr/share/ca-certificates/"
+    #     links:
+    #         - postgres:app_db
+    #     # ports:
+    #     #     - "443:443"
+    #     #     - "80:80"
+    #     networks:
+    #         - docker_network
+    #     environment:
+    #         LISTEN_ADDR: 0.0.0.0
+    #         LISTEN_HTTP_PORT: "80"
+    #         LISTEN_HTTPS_PORT: "443"
+    #         DB_ADDR: app_db
+    #         DB_PORT: 5432
+    #         DB_USER: table_admin
+    #         DB_PASSWORD: ${USERPWD}
+    #         DB_NAME: pBlog
+    #         TLS_CERT_FILEPATH: ${TLS_CERT_FILEPATH}
+    #         TLS_KEY_FILEPATH: ${TLS_KEY_FILEPATH}
+    #     depends_on:
+    #         - postgres
     postgres:
         container_name: postgres
-        build: 
+        build:
             context: ./db
         volumes:
             - <<: *services-volume
               source: /${HOST}/postgres
               target: /var/lib/postgres
             #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
-        expose: 
+        expose:
             - 5432
         networks:
             - docker_network
-        environment: 
+        environment:
             #PGDATA: /var/lib/postgresql/data
             POSTGRES_DB: chicken_review
             #POSTGRES_HOST_AUTH_METHOD: trust
             POSTGRES_USER: table_admin
             POSTGRES_PASSWORD: ${USERPWD}
             POSTGRES_INITDB_ARGS: --encoding=UTF-8
-            
+
 networks:
     docker_network:
         driver: bridge
