@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <!-- d3.mouse is remove at v6 instead use pointer -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <style></style>
   </head>
@@ -9,7 +10,12 @@
     <div id="my_dataviz"></div>
 
     <script>
-      const maxValue = 30;
+      const maxValue = 100;
+      var cellSize = 20;
+
+      function generatorRandomInt() {
+        return Math.floor(Math.random() * Math.floor(maxValue));
+      }
 
       var margin = { top: 0, right: 0, bottom: 0, left: 0 },
         width = 1000 - margin.left - margin.right,
@@ -70,6 +76,36 @@
         "v24",
         "v25",
         "v26",
+        "v27",
+        "v28",
+        "v29",
+        "v30",
+        "v31",
+        "v32",
+        "v33",
+        "v34",
+        "v35",
+        "v36",
+        "v37",
+        "v38",
+        "v39",
+        "v40",
+        "v41",
+        "v42",
+        "v43",
+        "v44",
+        "v45",
+        "v46",
+        "v47",
+        "v48",
+        "v49",
+        "v50",
+        "v51",
+        "v52",
+        "v53",
+        "v54",
+        "v55",
+        "v56",
       ];
 
       var data = [];
@@ -85,7 +121,20 @@
       }
       console.log(data);
 
-      var cellSize = 35;
+      // create a tooltip
+      var tooltip = d3
+        .select("#my_dataviz")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "5px");
+
+      var myColor = d3.scaleLinear().range(["white", "red"]).domain([1, 100]);
+
       var svg = d3
         .select("#my_dataviz")
         .append("svg")
@@ -142,19 +191,7 @@
           return str;
         })
         .attr("fill", function (d) {
-          if (d.value > 25) {
-            return "red";
-          }
-
-          if (d.value > 15) {
-            return "purple";
-          }
-
-          if (d.value < 5) {
-            return "white";
-          }
-
-          return "blue";
+          return myColor(d.value);
         })
         .attr("transform", function (d, i) {
           return (
@@ -164,11 +201,19 @@
             (height - cellSize - cellSize * myVars.indexOf(d.y)) +
             ")"
           );
+        })
+        .on("mouseover", function (event, d) {
+          tooltip.style("opacity", 1);
+        })
+        .on("mousemove", function (event, d) {
+          tooltip
+            .html("The exact value of<br>this cell is: " + d.value)
+            .style("left", d3.pointer(this)[0] + 0 + "px")
+            .style("top", d3.pointer(this)[1] + "px");
+        })
+        .on("mouseleave", function (event, d) {
+          tooltip.style("opacity", 0);
         });
-
-      function generatorRandomInt() {
-        return Math.floor(Math.random() * Math.floor(maxValue));
-      }
     </script>
   </body>
 </html>
