@@ -10,4 +10,14 @@ export default {
 const Template = (args) => <Header {...args} />;
 
 export const HeaderInfo = Template.bind({});
-HeaderInfo.arguments = {};
+HeaderInfo.arguments = {
+  signIn: () => {
+    alert("wip");
+  },
+  signUp: () => {
+    alert("wip");
+  },
+  onClickGoToHome: () => {
+    alert("wip");
+  },
+};
