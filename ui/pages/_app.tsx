@@ -20,10 +20,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     },
   };
   return (
-    <div className="flex flex-col h-screen">
-      <Header {...headerProps}></Header>
-      <Component {...pageProps} />
-      <Footer></Footer>
+    <div className="flex flex-col justify-between h-screen">
+      <div>
+        <Header {...headerProps}></Header>
+        <div className="flex justify-center">
+          <Component {...pageProps} />
+        </div>
+      </div>
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
   );
 }
