@@ -30,6 +30,8 @@ This project used
 
 Github CI/CD
 
+> [cross-the-world/ssh-scp-ssh-pipelines][cross-the-world/ssh-scp-ssh-pipelineslink]
+
 > [JamesIves/github-pages-deploy-action][jamesives/github-pages-deploy-actionlinklink]
 
 CSS
@@ -60,6 +62,7 @@ Container
 
 > [docker][dockerlink]
 
+[cross-the-world/ssh-scp-ssh-pipelineslink]: https://github.com/cross-the-world/ssh-scp-ssh-pipelines
 [jamesives/github-pages-deploy-actionlinklink]: https://github.com/JamesIves/github-pages-deploy-action
 [tailwindcsslink]: https://tailwindcss.com/
 [typescriptlink]: https://www.typescriptlang.org/
