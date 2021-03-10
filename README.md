@@ -24,6 +24,20 @@ Move the ui directory and
 
     npm run build
 
+or
+
+If you use docker
+
+> ### docker-compose build
+
+    docker-compose build
+
+    docker-compose up -d
+
+    OR
+
+    . dc.sh
+
 ## 3. Dependency
 
 This project used
