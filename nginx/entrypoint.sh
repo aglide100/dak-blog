@@ -1,11 +1,9 @@
 #!/bin/bash
 set -eu
 # receive env form outside
-export SubDomain
 export PrimaryDomain
 
-envsubst '${SubDomain} ${PrimaryDomain}' < /proxy.conf.template > /etc/nginx/sites-available/proxy.conf
-# envsubst '${SubDomain} ${PrimaryDomain}' < /index.html.template > /usr/share/nginx/html/index.html
+envsubst '${PrimaryDomain}' < /proxy.conf.template > /etc/nginx/sites-available/proxy.conf
 
 # if [[ -n "$USERNAME" ]] && [[ -n "$USERPWD" ]]
 # then
