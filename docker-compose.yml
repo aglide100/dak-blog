@@ -19,8 +19,10 @@ services:
       - /home/data/certbot/www:/var/www/certbot
     environment:
       PrimaryDomain: ${PrimaryDomain}
+    depends_on:
+      - node
   node:
-    container_name: nodejs
+    container_name: node
     build:
       context: ./ui
     expose:
