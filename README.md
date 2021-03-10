@@ -54,6 +54,10 @@ UI develop testing tool
 
 > [stoybook][storybooklink]
 
+LoadBalance
+
+> [nginx][nginxlink]
+
 Database
 
 > [postgresql][postgesqllink]
@@ -71,3 +75,4 @@ Container
 [storybooklink]: https://storybook.js.org/
 [postgesqllink]: https://www.postgresql.org/
 [dockerlink]: https://www.docker.com/
+[nginxlink]: https://www.nginx.com/
