@@ -25,11 +25,11 @@ services:
     container_name: node
     build:
       context: ./ui
-    expose:
-      - 3000
-    hostname: nodeapp
+    hostname: node
     networks:
       - docker_network
+    expose:
+      - 3000
   # go:
   #     container_name: app
   #     build:
