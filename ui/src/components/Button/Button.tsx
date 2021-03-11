@@ -8,6 +8,7 @@ export type ButtonProps = {
 export const Button = (props: ButtonProps) => {
   return (
     <button
+      className=""
       onClick={(ev) => {
         ev.preventDefault();
         props.onClick();

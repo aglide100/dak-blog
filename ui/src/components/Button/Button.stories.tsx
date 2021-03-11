@@ -1,15 +1,16 @@
+import { Story } from "@storybook/react/types-6-0";
 import React from "react";
-import { Button } from "./Button";
+import { Button, ButtonProps } from "./Button";
 
 export default {
   title: "Components/Button",
   component: Button,
 };
 
-const Template = (args) => <Button {...args} />;
+const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const ButtonNormal = Template.bind({});
-ButtonNormal.arguments = {
+ButtonNormal.args = {
   label: "hello",
   onClick: () => {
     alert("hello!d");
