@@ -8,6 +8,20 @@ writing some code or project at own blog
 
 ## 2. How to run?
 
+> ### docker-compose build
+
+    docker-compose build
+
+    docker-compose up -d
+
+    OR
+
+    . dc.sh
+
+OR
+
+Just run web only
+
 Move the ui directory and
 
     cd ui/
@@ -23,20 +37,6 @@ Move the ui directory and
 > ### run npm build
 
     npm run build
-
-or
-
-If you use docker
-
-> ### docker-compose build
-
-    docker-compose build
-
-    docker-compose up -d
-
-    OR
-
-    . dc.sh
 
 ## 3. Dependency
 
@@ -80,7 +80,16 @@ Container
 
 > [docker][dockerlink]
 
+---
+
+## 4. preview
+
+storybook
+
 > https://aglide100.github.io/personel-blog/
+
+vercel app
+
 > http://personel-blog-git-master.aglide100.vercel.app
 
 [cross-the-world/ssh-scp-ssh-pipelineslink]: https://github.com/cross-the-world/ssh-scp-ssh-pipelines
