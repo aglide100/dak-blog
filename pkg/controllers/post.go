@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -22,6 +23,6 @@ func (hdl *PostController) getPostList(resp http.ResponseWriter, req *http.Reque
 		log.Printf("Can't get post list!")
 	}
 
-	log.Printf("List: ", list)
+	fmt.Printf("List : %v", list)
 }
 
