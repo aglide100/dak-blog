@@ -17,7 +17,7 @@ func main() {
 
 	rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
 
-	ln, err := net.Listen("tcp", "localhost")
+	ln, err := net.Listen("tcp", "localhost:8888")
 	if err != nil {
 		log.Printf("Can't listen by tcp")
 	}
