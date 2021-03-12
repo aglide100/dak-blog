@@ -31,9 +31,9 @@ services:
     expose:
       - 3000
   go:
-    container_name: app
+    container_name: go
     build:
-      context: ./go
+      context: .
     links:
       - postgres:app_db
     expose:
