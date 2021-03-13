@@ -17,7 +17,7 @@ export function Header(props: HeaderProps) {
           }}
         >
           Logo
-          <img src=""></img>
+          <img src="" alt=""></img>
         </div>
 
         <div className="flex flex-row mr-10">

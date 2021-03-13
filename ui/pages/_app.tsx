@@ -4,6 +4,7 @@ import { Footer } from "../src/components/Footer/Footer";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -21,6 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
   return (
     <div className="flex flex-col justify-between h-screen">
+      <Head>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+      </Head>
       <div>
         <Header {...headerProps}></Header>
         <div className="flex justify-center">
