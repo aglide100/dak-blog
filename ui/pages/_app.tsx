@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const headerProps: HeaderProps = {
     signIn: () => {
-      alert("wip");
+      router.push("/auth/login");
     },
     signUp: () => {
       alert("wip");
@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="" />
+        <meta name="description" content="just blog" />
       </Head>
       <div>
         <Header {...headerProps}></Header>
