@@ -3,41 +3,14 @@ x-services-volume: &services-volume
   type: bind
 
 services:
-  nginx:
-    container_name: nginx
-    build:
-      context: ./nginx
-    restart: always
-    hostname: nginx
-    networks:
-      - docker_network
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /home/data/certbot/www:/var/www/certbot
-    environment:
-      PrimaryDomain: ${PrimaryDomain}
-    depends_on:
-      - node
-  node:
-    container_name: node
-    build:
-      context: ./ui
-    hostname: node
-    networks:
-      - docker_network
-    expose:
-      - 3000
   go:
     container_name: go
     build:
-      context: .
+      context: ../
     links:
       - postgres:app_db
-    expose:
-      - 8888
+    ports: 
+      - "8888:8888"
     networks:
       - docker_network
     environment:
@@ -51,7 +24,7 @@ services:
   postgres:
     container_name: postgres
     build:
-      context: ./db
+      context: ../db
     volumes:
       - <<: *services-volume
         source: /${HOST}/postgres

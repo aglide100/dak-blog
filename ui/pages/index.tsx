@@ -24,7 +24,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>Helloooo!</div>
-      <div onClick={getSomeThing}>test axios</div>
+      <div onClick={() => getSomeThing()}>test axios</div>
       {/* <div ref={svgRef}>test</div> */}
     </div>
   );
