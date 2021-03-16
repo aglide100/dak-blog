@@ -65,7 +65,6 @@ server {
 
     location = /api {
         return 301 /api/
-    break;
     }
 
     location ~/api/(?<ndpath>.*) {
@@ -74,6 +73,7 @@ server {
         proxy_pass              http://docker-golang;
         proxy_http_version      1.1;
     	proxy_set_header X-Real-IP $remote_addr;
+    break;
     }
 
  }
