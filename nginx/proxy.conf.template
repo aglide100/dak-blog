@@ -64,7 +64,7 @@ server {
     }
 
     location = /api {
-        return 301 /api/
+        return 301 /api/;
     }
 
     location ~/api/(?<ndpath>.*) {
