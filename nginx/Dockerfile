@@ -8,15 +8,7 @@ RUN apt-get install -y apache2-utils && apt-get install -y gettext-base
 
 RUN rm -rf /etc/nginx/sites-enabled/default
 
-# RUN mkdir -p /var/webdav/file && mkdir -p /var/webdav/client_temp
-# RUN chown www-data:root -R /var/webdav
-# RUN chmod -R 777 /var/webdav
-
 COPY nginx.conf /etc/nginx/nginx.conf
-
-# nginx의 index.html. 현재 nginx에서 프록시 패스를 해주는 서비스들 링크가 있음
-# COPY docs/ /usr/share/nginx/
-# RUN chmod -R 755 /usr/share/nginx/html/img
 
 RUN  mkdir -p /etc/nginx/conf.d
 

@@ -8,6 +8,10 @@ upstream docker-node {
     server node:3000;
 }
 
+upstream docker-golang {
+    server go:8888;
+}
+
 server {
     listen 80;
  
@@ -58,4 +62,18 @@ server {
     	proxy_set_header X-Real-IP $remote_addr;
 	break;
     }
+
+    location = /api {
+        return 301 /api/
+    break;
+    }
+
+    location ~/api/(?<ndpath>.*) {
+        http2_push_preload      on;
+        proxy_buffering         off;
+        proxy_pass              http://docker-golang;
+        proxy_http_version      1.1;
+    	proxy_set_header X-Real-IP $remote_addr;
+    }
+
  }
