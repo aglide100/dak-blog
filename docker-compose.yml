@@ -45,7 +45,7 @@ services:
       DB_PORT: 5432
       DB_USER: table_admin
       DB_PASSWORD: ${USERPWD}
-      DB_NAME: pBlog
+      DB_NAME: blog
     depends_on:
       - postgres
   postgres:
@@ -63,7 +63,7 @@ services:
       - docker_network
     environment:
       #PGDATA: /var/lib/postgresql/data
-      POSTGRES_DB: pBlog
+      POSTGRES_DB: blog
       #POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_USER: table_admin
       POSTGRES_PASSWORD: ${USERPWD}
