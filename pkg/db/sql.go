@@ -23,7 +23,17 @@ func ConnectDB(host string, port int, user, password, dbname string) (*Database,
 	return &Database{conn: db}, nil
 }
 
-func (db *Database) SearchReviews(keyword string) ([]*models.Post, error) {
+func (db *Database) GetPost() (*models.Post , error){
+	return nil,nil
+} 
+func (db *Database) WritePost() (error){
+	return nil
+} 
+func (db *Database) UpdatePost() (error){
+	return nil
+} 
+
+func (db *Database) SearchPosts(keyword string) ([]*models.Post, error) {
 	const q = `
 	
 	`

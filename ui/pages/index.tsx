@@ -11,7 +11,7 @@ export default function Home() {
   // }, []);
 
   function getSomeThing() {
-    axios.get("127.0.0.1:8888").then((res) => {
+    axios.get("https://dak-blog.live/api/test").then((res) => {
       const data = res.data;
       alert(data);
     });

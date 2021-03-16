@@ -13,14 +13,20 @@ import (
 func main() {
 	defaultCtrl := &controllers.DefaultController{}
 	notFoundCtrl := &controllers.NotFoundController{}
-	apiCtrl := &api.ApiController{}
+	userCtrl := &controllers.UserController{}
+	// postCtrl := &controllers.PostController{}
+
 
 	rtr := router.NewRouter(notFoundCtrl)
 
 	rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
-	rtr.AddRule("api", "GET", "/test", apiCtrl.TestHttpRequest)
+	rtr.AddRule("api", "GET", "/test", api.TestHttpRequest)
+	
+	rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)
+	
 
-	ln, err := net.Listen("tcp", "localhost:8888")
+
+	ln, err := net.Listen("tcp", "0.0.0.0:8888")
 	if err != nil {
 		log.Printf("Can't listen by tcp")
 	}

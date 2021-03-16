@@ -9,7 +9,7 @@ services:
       context: ../
     links:
       - postgres:app_db
-    ports: 
+    ports:
       - "8888:8888"
     networks:
       - docker_network
@@ -22,12 +22,12 @@ services:
     depends_on:
       - postgres
   postgres:
-    container_name: postgres
+    container_name: postgresTest
     build:
       context: ../db
     volumes:
       - <<: *services-volume
-        source: /${HOST}/postgres
+        source: /tmp/postgres
         target: /var/lib/postgres
       #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
     expose:
