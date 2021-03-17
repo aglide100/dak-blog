@@ -23,15 +23,30 @@ func ConnectDB(host string, port int, user, password, dbname string) (*Database,
 	return &Database{conn: db}, nil
 }
 
-func (db *Database) GetPost() (*models.Post , error){
-	return nil,nil
-} 
-func (db *Database) WritePost() (error){
+func (db *Database) GetPost() (*models.Post, error) {
+	const q = `
+SELECT
+	ID,
+	Title,
+	Author,
+	WrittenDate,
+	UpdateDate,
+	Comment,
+	PictureURLs,
+	Thumbnail
+FROM
+	post
+ORDER BY ID ASC
+	`
+
+	return nil, nil
+}
+func (db *Database) WritePost() error {
 	return nil
-} 
-func (db *Database) UpdatePost() (error){
+}
+func (db *Database) UpdatePost() error {
 	return nil
-} 
+}
 
 func (db *Database) SearchPosts(keyword string) ([]*models.Post, error) {
 	const q = `
@@ -46,11 +61,11 @@ func (db *Database) SearchPosts(keyword string) ([]*models.Post, error) {
 	}
 
 	var (
-		ID int64
-		Title string
-		Author string
+		ID          int64
+		Title       string
+		Author      string
 		WrittenDate string
-		UpdateDate string
+		UpdateDate  string
 	)
 
 	for rows.Next() {
@@ -60,11 +75,11 @@ func (db *Database) SearchPosts(keyword string) ([]*models.Post, error) {
 		}
 
 		Post := &models.Post{
-			ID: ID,
-			Title: Title,
-			Author: Author,
+			ID:          ID,
+			Title:       Title,
+			Author:      Author,
 			WrittenDate: WrittenDate,
-			UpdateDate: UpdateDate,
+			UpdateDate:  UpdateDate,
 		}
 
 		allPosts = append(allPosts, Post)

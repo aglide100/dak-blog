@@ -10,6 +10,7 @@ CREATE TABLE post (
     PictureURLS     text[],
     Date            text,
     Comment         text,
+    Thumbnail       text
 );
 
 CREATE TABLE account (
