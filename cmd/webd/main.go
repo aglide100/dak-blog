@@ -16,15 +16,12 @@ func main() {
 	userCtrl := &controllers.UserController{}
 	// postCtrl := &controllers.PostController{}
 
-
 	rtr := router.NewRouter(notFoundCtrl)
 
 	rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
 	rtr.AddRule("api", "GET", "/test", api.TestHttpRequest)
-	
-	rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)
-	
 
+	rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)
 
 	ln, err := net.Listen("tcp", "0.0.0.0:8888")
 	if err != nil {
@@ -38,7 +35,6 @@ func main() {
 	log.Printf("starting server at address %q", ln.Addr().String())
 
 	err = srv.Serve(ln)
-	//err = srv.Serve(ln)
 	if err != nil {
 		log.Printf("Can't serve!")
 	}

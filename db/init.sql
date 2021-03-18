@@ -1,5 +1,5 @@
-GRANT ALL PRIVILEGES ON DATABASE pBlog TO table_admin;
-
+GRANT ALL PRIVILEGES 
+ON DATABASE blog TO table_admin;
 --CREATE EXTENSION pgcrypto;
 
 CREATE TABLE post (
