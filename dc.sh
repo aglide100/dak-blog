@@ -9,8 +9,7 @@ docker-compose down --remove-orphans
 
 echo "====> Remove unused Conataner"
 cd $DockerService
-docker image prune -a 
-y
+docker image prune -a -f
 
 echo "====> Build Docker-Compose"
 cd $DockerService
