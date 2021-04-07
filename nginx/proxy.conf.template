@@ -87,14 +87,14 @@ server {
     listen 443 ssl;
     
     ssl on;
-    ssl_certificate /etc/letsencrypt/live/${SubDomain}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${SubDomain}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${PrimaryDomain}/privkey.pem;
     
 
     location / {
     	proxy_pass https://docker-nextcloud;
-        proxy_ssl_certificate     /etc/letsencrypt/live/${SubDomain}/fullchain.pem;
-    	proxy_ssl_certificate_key /etc/letsencrypt/live/${SubDomain}/privkey.pem;
+        proxy_ssl_certificate     /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
+    	proxy_ssl_certificate_key /etc/letsencrypt/live/${PrimaryDomain}/privkey.pem;
 	
 	proxy_read_timeout 5000;
    	proxy_connect_timeout 5000;
