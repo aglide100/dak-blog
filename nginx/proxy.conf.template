@@ -4,7 +4,7 @@ map $http_upgrade $connection_upgrade {
 }
 
 upstream docker-nextcloud {
-    server nextcloud:443;
+    server nextcloud;
 }
 
 upstream docker-node {
@@ -45,7 +45,6 @@ server {
     ssl_certificate /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${PrimaryDomain}/privkey.pem;
     
-
     location / {
     	proxy_pass https://docker-nextcloud;
         proxy_ssl_certificate     /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
