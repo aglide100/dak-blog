@@ -68,6 +68,22 @@ services:
       POSTGRES_USER: table_admin
       POSTGRES_PASSWORD: ${USERPWD}
       POSTGRES_INITDB_ARGS: --encoding=UTF-8
+  nextcloud:
+    image: ghcr.io/linuxserver/nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Seoul
+    volumes:
+      - /home/data/repositories/docker-repository/nextcloud/appdata:/config
+      - /home/data/repositories/docker-repository/file/:/data
+    hostname: nextcloud
+    networks:
+      - docker_network
+    expose:
+      - 443
+    restart: unless-stopped
 
 networks:
   docker_network:
