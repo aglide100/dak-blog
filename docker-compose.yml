@@ -59,6 +59,7 @@ services:
       #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
     expose:
       - 5432
+    hostname: postgres
     networks:
       - docker_network
     environment:

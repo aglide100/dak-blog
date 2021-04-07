@@ -2,6 +2,8 @@ GRANT ALL PRIVILEGES
 ON DATABASE blog TO table_admin;
 --CREATE EXTENSION pgcrypto;
 
+CREATE DATABASE nextcloud OWNER table_admin;
+
 CREATE TABLE post (
     ID      serial PRIMARY KEY,
     Title   varchar(200),
