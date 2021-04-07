@@ -82,6 +82,8 @@ services:
     hostname: nextcloud
     networks:
       - docker_network
+    links:
+      - postgres:app_db
     expose:
       - 443
     restart: unless-stopped
