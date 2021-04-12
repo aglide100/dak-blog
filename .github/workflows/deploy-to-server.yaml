@@ -19,12 +19,12 @@ jobs:
               with:
                   host: ${{ secrets.DC_HOST }}
                   user: ${{ secrets.DC_USER }}
-                  pass: ${{ secrets.DC_PASS }}
+                  #pass: ${{ secrets.DC_PASS }}
                   port: ${{ secrets.DC_PORT }}
                   key: ${{ secrets.DC_KEY }}
                   connect_timeout: 10s
                   first_ssh: |
-                      key
+                      pwd
                   scp: |
                       './*' => ${{ secrets.PATH }}
                   last_ssh: |
