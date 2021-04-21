@@ -54,7 +54,7 @@ services:
       context: ./db
     volumes:
       - <<: *services-volume
-        source: /${HOST}/postgres
+        source: ${HOST}/postgres
         target: /var/lib/postgres
       #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
     expose:
