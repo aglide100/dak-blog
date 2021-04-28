@@ -7,6 +7,10 @@ echo "====> Service Close Docker-compose"
 cd $DockerService
 docker-compose down --remove-orphans
 
+echo "====> Remove docker network"
+cd $DockerService
+docker network prune -f
+
 echo "====> Remove unused Conataner"
 cd $DockerService
 docker image prune -a -f
