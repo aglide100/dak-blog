@@ -3,10 +3,10 @@ map $http_upgrade $connection_upgrade {
 	''	close;
 }
 
-upstream docker-nextcloud {
-    server nextcloud:443;
-    keepalive 100;
-}
+//upstream docker-nextcloud {
+//    server nextcloud:443;
+//    keepalive 100;
+//}
 
 upstream docker-node {
     server node:3000;
@@ -36,38 +36,38 @@ server {
 }
 
 
- server {
-    server_name nextcloud.${PrimaryDomain};
-    charset utf-8;
-    
-    listen [::]:443 ssl http2;
-    listen 443 ssl http2;
-    
-    ssl on;
-    ssl_certificate /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${PrimaryDomain}/privkey.pem;
-    
-    location / {
-        http2_push_preload      on;
-        proxy_buffering         off;
-    	proxy_pass https://docker-nextcloud;
-        proxy_ssl_certificate     /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
-    	proxy_ssl_certificate_key /etc/letsencrypt/live/${PrimaryDomain}/privkey.pem;
-	
-	proxy_read_timeout 40000;
-   	proxy_connect_timeout 40000;
-   	proxy_send_timeout 40000;
-   	send_timeout 40000;
-
-        client_max_body_size 10m;
-	client_body_buffer_size    128k;
-    
-   	proxy_set_header Connection 'upgrade';
-   	proxy_set_header Host $host;
-   	proxy_cache_bypass $http_upgrade;
-	break;
-    }
-}
+// server {
+//    server_name nextcloud.${PrimaryDomain};
+//    charset utf-8;
+//    
+//    listen [::]:443 ssl http2;
+//    listen 443 ssl http2;
+//    
+//    ssl on;
+//    ssl_certificate /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
+//    ssl_certificate_key /etc/letsencrypt/live/${PrimaryDomain}/privkey.pem;
+//    
+//    location / {
+//        http2_push_preload      on;
+//        proxy_buffering         off;
+//    	proxy_pass https://docker-nextcloud;
+//        proxy_ssl_certificate     /etc/letsencrypt/live/${PrimaryDomain}/fullchain.pem;
+//    	proxy_ssl_certificate_key /etc/letsencrypt/live/${PrimaryDomain}/privkey.pem;
+//	
+//	proxy_read_timeout 40000;
+//   	proxy_connect_timeout 40000;
+//   	proxy_send_timeout 40000;
+//   	send_timeout 40000;
+//
+//        client_max_body_size 10m;
+//	client_body_buffer_size    128k;
+//    
+//   	proxy_set_header Connection 'upgrade';
+//   	proxy_set_header Host $host;
+//   	proxy_cache_bypass $http_upgrade;
+//	break;
+//    }
+//}
 
 
 
