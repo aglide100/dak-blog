@@ -39,6 +39,8 @@
     "axios": "^0.21.1",
     "create-next-app": "^10.0.6",
     "d3": "^6.5.0",
+    "google-protobuf": "^3.17.3",
+    "monaco-editor": "^0.26.1",
     "next": "^10.0.6",
     "postcss": "^7.0.35",
     "react": "^17.0.1",
