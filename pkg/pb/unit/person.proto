@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package unit;
+
+message Person {
+  string color = 1;
+}
