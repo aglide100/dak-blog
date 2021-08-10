@@ -6,22 +6,16 @@ import (
 	"net/http"
 
 	"github.com/aglide100/personel-blog/pkg/api"
-	"github.com/aglide100/personel-blog/pkg/controllers"
 	"github.com/aglide100/personel-blog/pkg/router"
 )
 
 func main() {
-	defaultCtrl := &controllers.DefaultController{}
-	notFoundCtrl := &controllers.NotFoundController{}
-	userCtrl := &controllers.UserController{}
-	// postCtrl := &controllers.PostController{}
+	rtr := router.NewRouter(nil)
 
-	rtr := router.NewRouter(notFoundCtrl)
-
-	rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
+	// rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
 	rtr.AddRule("api", "GET", "/test", api.TestHttpRequest)
 
-	rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)
+	// rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)
 
 	ln, err := net.Listen("tcp", "0.0.0.0:8888")
 	if err != nil {

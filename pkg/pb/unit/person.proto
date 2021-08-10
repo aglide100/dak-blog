@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package unit;
+option go_package = "github.com/aglide100/personel-blog/pkg/pb/unit";
+
+message Person {
+  string name= 1;
+  string age =2;
+}
