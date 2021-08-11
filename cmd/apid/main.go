@@ -5,15 +5,16 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/aglide100/personel-blog/pkg/api"
-	"github.com/aglide100/personel-blog/pkg/router"
+	""
+	"github.com/aglide100/dak-blog/pkg/svc"
+	"github.com/aglide100/dak-blog/pkg/router"
 )
 
 func main() {
-	rtr := router.NewRouter(nil)
+	rtr := router.NewRouter()
 
-	// rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
-	rtr.AddRule("api", "GET", "/test", api.TestHttpRequest)
+	rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
+	rtr.AddRule("svc", "GET", "/test", svc.TestHttpRequest)
 
 	// rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)
 
