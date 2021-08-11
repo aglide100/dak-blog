@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/aglide100/personel-blog/pkg/db"
+	"github.com/aglide100/dak-blog/pkg/db"
 )
 
 type UserController struct {

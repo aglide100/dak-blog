@@ -1,4 +1,4 @@
-package api
+package svc
 
 import (
 	"encoding/json"
@@ -7,9 +7,9 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
-	"github.com/aglide100/personel-blog/pkg/models"
+	"github.com/aglide100/dak-blog/pkg/models"
 
-	pb "github.com/aglide100/personel-blog/pkg/pb/unit"
+	pb "github.com/aglide100/dak-blog/pkg/pb/unit"
 )
 
 const (filename = "person")

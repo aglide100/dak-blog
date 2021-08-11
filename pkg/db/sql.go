@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/aglide100/personel-blog/pkg/models"
+	"github.com/aglide100/dak-blog/pkg/models"
 )
 
 type Database struct {
