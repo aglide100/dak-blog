@@ -5,7 +5,7 @@ import (
 	"net"
 	"net/http"
 
-	""
+	// "github.com/aglide100/dak-blog/pkg/controllers"
 	"github.com/aglide100/dak-blog/pkg/svc"
 	"github.com/aglide100/dak-blog/pkg/router"
 )
@@ -13,7 +13,7 @@ import (
 func main() {
 	rtr := router.NewRouter()
 
-	rtr.AddRule("default", "GET", "^/$", defaultCtrl.ServeHTTP)
+	// rtr.AddRule("default", "GET", "^/$", controllers.DefaultController.ServeHTTP)
 	rtr.AddRule("svc", "GET", "/test", svc.TestHttpRequest)
 
 	// rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)

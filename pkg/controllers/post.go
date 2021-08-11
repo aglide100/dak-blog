@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/aglide100/personel-blog/pkg/db"
-	"github.com/aglide100/personel-blog/pkg/models"
+	"github.com/aglide100/dak-blog/pkg/db"
+	"github.com/aglide100/dak-blog/pkg/models"
 )
 
 type PostController struct {
