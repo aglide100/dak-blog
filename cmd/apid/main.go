@@ -11,6 +11,14 @@ import (
 )
 
 func main() {
+	if err := realMain(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func realMain() error {
+	log.Printf("start realmain")
+
 	rtr := router.NewRouter()
 
 	// rtr.AddRule("default", "GET", "^/$", controllers.DefaultController.ServeHTTP)
