@@ -1,4 +1,4 @@
-# personel-blog
+# dak-blog
 
 ### This repo is make simple web blog
 
@@ -86,11 +86,11 @@ Container
 
 storybook
 
-> https://aglide100.github.io/personel-blog/
+> https://aglide100.github.io/dak-blog/
 
 vercel app
 
-> http://personel-blog-git-master.aglide100.vercel.app
+> http://dak-blog-git-master.aglide100.vercel.app
 
 [cross-the-world/ssh-scp-ssh-pipelineslink]: https://github.com/cross-the-world/ssh-scp-ssh-pipelines
 [jamesives/github-pages-deploy-actionlinklink]: https://github.com/JamesIves/github-pages-deploy-action

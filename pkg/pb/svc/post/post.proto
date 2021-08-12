@@ -1,32 +1,52 @@
 syntax = "proto3";
 
-package pb.unit.post;
+package pb.svc.post;
 option go_package = "github.com/aglide100/dak-blog/pkg/pb/unit/post";
 
 service Post {
-    rpc CreatePost() returns ();
-    rpc UpdatePost() returns ();
-    rpc GetPost() returns ();
-    rpc DeletePost() returns ();
-    rpc ListPost() returns ();
+    rpc CreatePost(CreatePostReq) returns (CreatePostRes);
+    rpc UpdatePost(UpdatePostReq) returns (UpdatePostRes);
+    rpc GetPost(GetPostReq) returns (GetPostRes);
+    rpc DeletePost(DeletePostReq) returns (DeletePostRes);
+    rpc ListPost(ListPostReq) returns (ListPostRes);
 }
 
-message CreatePost {
+message CreatePostReq {
+
+}
+
+message CreatePostRes {
     
 }
 
-message UpdatePost {
+message UpdatePostReq {
 
 }
 
-message GetPost {
+message UpdatePostRes {
 
 }
 
-message DeletePost {
+message GetPostReq {
 
 }
 
-message ListPost {
+message GetPostRes {
+
+}
+
+message DeletePostReq {
+
+}
+
+message DeletePostRes {
+
+}
+
+message ListPostReq {
+    
+}
+
+message ListPostRes {
     
 }

@@ -1,5 +1,5 @@
 # Docker-compose.yml이 위치한 디렉토리
-export DockerService=~/personel-blog
+export DockerService=~/dak-blog
 
 #!/bin/bash
 

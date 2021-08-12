@@ -1,8 +1,8 @@
 FROM golang:1.14 AS builder
 
-COPY . "/go/src/github.com/aglide100/personel-blog"
-# COPY ./pkg "/go/src/github.com/aglide100/personel-blog"
-WORKDIR "/go/src/github.com/aglide100/personel-blog/"
+COPY . "/go/src/github.com/aglide100/dak-blog"
+# COPY ./pkg "/go/src/github.com/aglide100/dak-blog"
+WORKDIR "/go/src/github.com/aglide100/dak-blog/"
 
 RUN mkdir -p /opt/bin/webd/
 RUN mkdir -p /var/lib/webd/
