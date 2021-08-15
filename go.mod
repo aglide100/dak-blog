@@ -1,6 +1,6 @@
 module github.com/aglide100/dak-blog
 
-go 1.14
+go 1.13
 
 require (
 	github.com/golang/protobuf v1.5.2

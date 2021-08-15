@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
 
 	// "github.com/aglide100/dak-blog/pkg/controllers"
 	"github.com/aglide100/dak-blog/pkg/svc"
@@ -13,6 +14,7 @@ import (
 func main() {
 	if err := realMain(); err != nil {
 		log.Fatal(err)
+		os.Exit(1)
 	}
 }
 
@@ -41,5 +43,5 @@ func realMain() error {
 	if err != nil {
 		log.Printf("Can't serve!")
 	}
-
+	return nil
 }
