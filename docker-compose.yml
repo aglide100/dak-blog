@@ -1,0 +1,73 @@
+version: "3.5"
+x-services-volume: &services-volume
+  type: bind
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./cmd/nginx
+    restart: always
+    hostname: nginx
+    networks:
+      - docker_network
+    ports:
+      - "3010:80"
+    depends_on:
+      - node
+  node:
+    container_name: node
+    build:
+      context: ./ui
+    hostname: node
+    networks:
+      - docker_network
+    expose:
+      - 3000
+  api:
+    container_name: api
+    build:
+      context: ./
+    links:
+      - postgres:app_db
+    expose:
+      - 8888
+    hostname: api
+    networks:
+      - docker_network
+    environment:
+      DB_ADDR: app_db
+      DB_PORT: 5432
+      DB_USER: table_admin
+      DB_PASSWORD: ${USERPWD}
+      DB_NAME: blog
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    build:
+      context: ./cmd/db
+    volumes:
+      - <<: *services-volume
+        source: ${HOST}/postgres
+        target: /var/lib/postgres
+    expose:
+      - 5432
+    hostname: postgres
+    networks:
+      - docker_network
+    environment:
+      #PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: blog
+      #POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: table_admin
+      POSTGRES_PASSWORD: ${USERPWD}
+      POSTGRES_INITDB_ARGS: --encoding=UTF-8
+
+networks:
+  docker_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "true"
+    ipam:
+      driver: default
