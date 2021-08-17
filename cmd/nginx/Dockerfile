@@ -3,13 +3,15 @@ FROM nginx
 
 RUN rm -rf /etc/nginx/sites-enabled/default
 
-COPY nginx.conf /etc/nginx/nginx.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 RUN  mkdir -p /etc/nginx/conf.d
 
 RUN mkdir -p /etc/nginx/sites-available && mkdir -p /etc/nginx/sites-enabled
 
-COPY proxy.conf /etc/nginx/sites-available/.
+COPY ./proxy.conf /etc/nginx/sites-available/
 
 RUN ln -s /etc/nginx/sites-available/proxy.conf /etc/nginx/sites-enabled/proxy.conf
 
