@@ -12,7 +12,7 @@ services:
     networks:
       - docker_network
     ports:
-      - "80:80"
+      - "3010:80"
     depends_on:
       - node
   node:
