@@ -19,6 +19,7 @@ func TestHttpRequest(resp http.ResponseWriter, req *http.Request) {
 	
 	person := &pb.Person{Name: "apple", Age: "12"}
 	out, err := proto.Marshal(person)
+
 	if err != nil {
 		log.Fatalf("Failed to write buff %v", err)
 	}

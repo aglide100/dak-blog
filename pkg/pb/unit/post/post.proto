@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb.unit.post;
+option go_package = "pb.unit.post";
+
+message Post {
+    string title = 1;
+    string author = 2;
+    string wirttenDate = 3;
+    string content = 4;
+    string defaultPicture = 5;
+    []string pictureURLs = 6;
+}
