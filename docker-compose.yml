@@ -6,7 +6,7 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: ./nginx
+      context: ./cmd/nginx
     restart: always
     hostname: nginx
     networks:
@@ -46,7 +46,7 @@ services:
   postgres:
     container_name: postgres
     build:
-      context: ./db
+      context: ./cmd/db
     volumes:
       - <<: *services-volume
         source: ${HOST}/postgres
