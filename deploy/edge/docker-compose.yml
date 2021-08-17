@@ -3,14 +3,36 @@ x-services-volume: &services-volume
   type: bind
 
 services:
-  go:
-    container_name: go
+  nginx:
+    container_name: nginx
     build:
-      context: ../
+      context: ../../cmd/nginx
+    restart: always
+    hostname: nginx
+    networks:
+      - docker_network
+    ports:
+      - "3011:80"
+    depends_on:
+      - node
+  node:
+    container_name: node
+    build:
+      context: ../../ui
+    hostname: node
+    networks:
+      - docker_network
+    expose:
+      - 3000
+  api:
+    container_name: api
+    build:
+      context: ../../.
     links:
       - postgres:app_db
-    ports:
-      - "8888:8888"
+    expose:
+      - 8888
+    hostname: api
     networks:
       - docker_network
     environment:
@@ -18,25 +40,25 @@ services:
       DB_PORT: 5432
       DB_USER: table_admin
       DB_PASSWORD: ${USERPWD}
-      DB_NAME: pBlog
+      DB_NAME: blog
     depends_on:
       - postgres
   postgres:
-    container_name: postgresTest
+    container_name: postgres
     build:
-      context: ../db
+      context: ../../cmd/db
     volumes:
       - <<: *services-volume
-        source: /tmp/postgres
+        source: ${HOST}/postgres
         target: /var/lib/postgres
-      #- "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
     expose:
       - 5432
+    hostname: postgres
     networks:
       - docker_network
     environment:
       #PGDATA: /var/lib/postgresql/data
-      POSTGRES_DB: pBlog
+      POSTGRES_DB: blog
       #POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_USER: table_admin
       POSTGRES_PASSWORD: ${USERPWD}
