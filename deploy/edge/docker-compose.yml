@@ -4,7 +4,7 @@ x-services-volume: &services-volume
 
 services:
   nginx:
-    container_name: nginx
+    container_name: edge_nginx
     build:
       context: ../../cmd/nginx
     restart: always
@@ -16,7 +16,7 @@ services:
     depends_on:
       - node
   node:
-    container_name: node
+    container_name: edge_node
     build:
       context: ../../ui
     hostname: node
@@ -25,7 +25,7 @@ services:
     expose:
       - 3000
   api:
-    container_name: api
+    container_name: edge_api
     build:
       context: ../../.
     links:
@@ -44,7 +44,7 @@ services:
     depends_on:
       - postgres
   postgres:
-    container_name: postgres
+    container_name: edge_postgres
     build:
       context: ../../cmd/db
     volumes:
