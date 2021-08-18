@@ -5,14 +5,15 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/aglide100/dak-blog/pkg/models"
+	pb_unit_post "github.com/aglide100/dak-blog/pkg/pb/unit/post"
+	_ "github.com/lib/pq"
 )
 
 type Database struct {
 	conn *sql.DB
 }
 
-func ConnectDB(host string, port int, user, password, dbname string) (*Database, error) {
+func ConnectDB(host string, port int, user string, password string, dbname string) (*Database, error) {
 	psqInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
@@ -23,7 +24,7 @@ func ConnectDB(host string, port int, user, password, dbname string) (*Database,
 	return &Database{conn: db}, nil
 }
 
-func (db *Database) GetPost() (*models.Post, error) {
+func (db *Database) GetPost() (*pb_unit_post.Post, error) {
 	const q = `
 SELECT
 	ID,
@@ -48,12 +49,12 @@ func (db *Database) UpdatePost() error {
 	return nil
 }
 
-func (db *Database) SearchPosts(keyword string) ([]*models.Post, error) {
+func (db *Database) SearchPosts(keyword string) ([]*pb_unit_post.Post, error) {
 	const q = `
 	
 	`
 
-	var allPosts []*models.Post
+	var allPosts []*pb_unit_post.Post
 
 	rows, err := db.conn.Query(q, keyword)
 	if err != nil {
@@ -74,12 +75,11 @@ func (db *Database) SearchPosts(keyword string) ([]*models.Post, error) {
 			return nil, fmt.Errorf("rows err : %v", err)
 		}
 
-		Post := &models.Post{
-			ID:          ID,
+		Post := &pb_unit_post.Post{
+			Id:          ID,
 			Title:       Title,
 			Author:      Author,
 			WrittenDate: WrittenDate,
-			UpdateDate:  UpdateDate,
 		}
 
 		allPosts = append(allPosts, Post)
