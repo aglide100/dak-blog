@@ -1,11 +1,13 @@
 package db
 
-import "github.com/aglide100/dak-blog/pkg/models"
+import (
+	pb_unit_post "github.com/aglide100/dak-blog/pkg/pb/unit/post"
+)
 
 type DB interface {
 	ConnectDB(host string, port int, user, password, dbname string) (*Database, error)
-	SearchPosts(keyword string) ([]*models.Post, error)
-	GetPost(id int64) (*models.Post, error)
-	WritePost(post *models.Post) (error)
-	UpdatePost(post *models.Post, id int64) (error)
+	SearchPosts(keyword string) ([]*pb_unit_post.Post, error)
+	GetPost(id int64) (*pb_unit_post.Post, error)
+	WritePost(post *pb_unit_post.Post) (error)
+	UpdatePost(post *pb_unit_post.Post, id int64) (error)
 }

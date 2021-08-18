@@ -5,10 +5,19 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strconv"
 
-	// "github.com/aglide100/dak-blog/pkg/controllers"
-	"github.com/aglide100/dak-blog/pkg/svc"
+	"github.com/aglide100/dak-blog/pkg/controllers"
+	"github.com/aglide100/dak-blog/pkg/db"
 	"github.com/aglide100/dak-blog/pkg/router"
+)
+
+var (
+	dbAddr = os.Getenv("DB_ADDR")
+	dbPort = os.Getenv("DB_PORT")
+	dbUser = os.Getenv("DB_USER")
+	dbPasswd = os.Getenv("DB_PASSWORD")
+	dbName = os.Getenv("DB_NAME")
 )
 
 func main() {
@@ -23,8 +32,20 @@ func realMain() error {
 
 	rtr := router.NewRouter()
 
-	// rtr.AddRule("default", "GET", "^/$", controllers.DefaultController.ServeHTTP)
-	rtr.AddRule("svc", "GET", "/test", svc.TestHttpRequest)
+	dbPort, err := strconv.Atoi(dbPort)
+	if err != nil {
+		log.Fatalf("Can't convert db port! %v", err)
+	}
+
+	db, err := db.ConnectDB(dbAddr, dbPort, dbUser, dbPasswd, dbName)
+	if err != nil {
+		log.Fatalf("Can't connect DB! %v", err)
+	}
+
+	postCtrl := controllers.NewPostController(db)
+
+	rtr.AddRule("post", "GET", "/getpost/([0-9]+)$", postCtrl.GetPost)
+	rtr.AddRule("post", "GET", "", postCtrl.DeletePost )
 
 	// rtr.AddRule("user", "POST", "/auth/signin", userCtrl.SignInUser)
 

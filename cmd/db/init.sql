@@ -1,26 +1,29 @@
-GRANT ALL PRIVILEGES 
-ON DATABASE blog TO table_admin;
---CREATE EXTENSION pgcrypto;
+GRANT ALL PRIVILEGES ON DATABASE blog TO table_admin;
 
-CREATE DATABASE nextcloud OWNER table_admin;
-
-CREATE TABLE post (
-    ID      serial PRIMARY KEY,
-    Title   varchar(200),
-    Author  varchar(200),
-    DefaultPictureURL   varchar(200),
-    PictureURLS     text[],
-    Date            text,
-    Comment         text,
-    Thumbnail       text
+CREATE TABLE posts (
+    post_id serial,
+    title varchar(200),
+    author varchar(200),
+    thumbnail varchar(200),
+    picture_urls text[],
+    written_date text,
+    content text,
+    PRIMARY KEY(post_id),
 );
 
-CREATE TABLE account (
-    UserID varchar(80),
-    UserPWD varchar(200),
-    Num serial,
-    Name text,
-    PhoneNumber text,
-    Language text,
-    SubscriptionDate DATE NOT NULL DEFAULT CURRENT_DATE
+CREATE TABLE accounts (
+    account_id varchar(80),
+    account_passwd varchar(200),
+    email varchar(100),
+    num serial,
+    account_name text,
+    subscription_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    PRIMARY KEY(account_id),
+);
+
+CREATE TABLE comments(
+    FOREIGN KEY(account_id) REFERENCES accounts(account_id),
+    FOREIGN KEY(post_id) REFERENCES posts(post_id),
+    commnet text,
+    written_date DATE NOT NULL DEFAULT CURRENT_DATE,
 );
