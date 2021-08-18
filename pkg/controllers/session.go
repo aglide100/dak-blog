@@ -25,7 +25,7 @@ func (hdl *SessionController) CreateSession(resp http.ResponseWriter, req *http.
 	}
 
 	session.Values["UserID"] = ""
-	
+
 	session.Save(req, resp)
 	if err != nil {
 		return fmt.Errorf("Can't save data in session! %v", err)
@@ -45,7 +45,7 @@ func (hdl *SessionController) DeleteSession(resp http.ResponseWriter, req *http.
 	session.Options.MaxAge = -1
 	err = session.Save(req, resp)
 	if err != nil {
-		return fmt.Errorf("failed to delete session", err)
+		return fmt.Errorf("failed to delete session %v", err)
 	}
 	return nil
 }
