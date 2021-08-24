@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	pb_unit_post "github.com/aglide100/dak-blog/pkg/pb/unit/post"
+	pb_unit_post "github.com/aglide100/dak-blog/pb/unit/post"
 	_ "github.com/lib/pq"
 )
 

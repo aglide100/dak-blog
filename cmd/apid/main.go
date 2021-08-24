@@ -29,13 +29,13 @@ func main() {
 	// 	log.Fatal(err)
 	// 	os.Exit(1)
 	// }
-	if err := testMain(); err != nil {
+	if err := realMain(); err != nil {
 		log.Fatal(err)
 		os.Exit(1)
 	}
 }
 
-func testMain() error {
+func useTlsMain() error {
 	ln, err := net.Listen("tcp", "0.0.0.0:50055")
 	if err != nil {
 		log.Printf("Can't listen by tcp")
