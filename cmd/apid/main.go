@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -10,6 +11,9 @@ import (
 	"github.com/aglide100/dak-blog/pkg/controllers"
 	"github.com/aglide100/dak-blog/pkg/db"
 	"github.com/aglide100/dak-blog/pkg/router"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 var (
@@ -21,11 +25,45 @@ var (
 )
 
 func main() {
-	if err := realMain(); err != nil {
+	// if err := realMain(); err != nil {
+	// 	log.Fatal(err)
+	// 	os.Exit(1)
+	// }
+	if err := testMain(); err != nil {
 		log.Fatal(err)
 		os.Exit(1)
 	}
 }
+
+func testMain() error {
+	ln, err := net.Listen("tcp", "0.0.0.0:50055")
+	if err != nil {
+		log.Printf("Can't listen by tcp")
+	}
+	defer ln.Close()
+
+	var opts []grpc.ServerOption
+	tls := false
+	if tls {
+		fmt.Println("Using tls keys")
+		serverCrt := "keys/server.crt"
+		serverPem := "keys/server.pem"
+		creds, err := credentials.NewServerTLSFromFile(serverCrt, serverPem)
+		if err != nil {
+			log.Fatalf("fail to load creds: %v", err)
+		}
+		opts = append(opts, grpc.Creds(creds))
+	}
+	log.Println("Starting grpc server...")
+	grpcServer := grpc.NewServer(opts...)
+
+	err = grpcServer.Serve(ln)
+	if err != nil {
+		log.Printf("Can't serve!")
+	}
+	return nil
+}
+
 
 func realMain() error {
 	log.Printf("start realmain")
@@ -59,7 +97,7 @@ func realMain() error {
 	log.Printf("listening on address %q", ln.Addr().String())
 
 	log.Printf("starting server at address %q", ln.Addr().String())
-
+	
 	err = srv.Serve(ln)
 	if err != nil {
 		log.Printf("Can't serve!")

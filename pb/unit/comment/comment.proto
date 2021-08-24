@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package pb.unit.comment;
+option go_package = "github.com/aglide100/dak-blog/pb/unit/comment";
+
+message Comment {
+    string author = 1;
+    string written_date = 3;
+    string comment = 4;
+}

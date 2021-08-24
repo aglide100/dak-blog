@@ -2,7 +2,6 @@ import React from "react";
 // import React, { useRef, useEffect, useState } from "react";
 // import { select, utcParse } from "d3";
 import Head from "next/head";
-import axios from "axios";
 
 export default function Home() {
   // const svgRef = useRef();
@@ -11,10 +10,14 @@ export default function Home() {
   // }, []);
 
   function getSomeThing() {
-    axios.get("https://dak-blog.live/api/test").then((res) => {
-      const data = res.data;
-      alert(data);
-    });
+    // const grpc = require("grpc");
+    // const protoLoader = require("@grpc/proto-loader");
+    // const PROTO_PATH = "";
+    // const SERVER_URI = "0.0.0.0:8888/api";
+    // axios.get("https://dak-blog.live/api/test").then((res) => {
+    //   const data = res.data;
+    //   alert(data);
+    // });
   }
 
   return (

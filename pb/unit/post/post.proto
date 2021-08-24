@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb.unit.post;
+option go_package = "github.com/aglide100/dak-blog/pb/unit/post";
+
+import "pb/unit/comment/comment.proto";
+
+message Post {
+    int64 id = 1;
+    string title = 2;
+    string author = 3;
+    string written_date = 4;
+    string content = 5;
+    string thumbnail = 6;
+    repeated string pictureURLs = 7;
+}
+
+message Comments {
+    repeated pb.unit.comment.Comment Comment = 1;
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package pb.svc;
+option go_package = "pb/svc";
+
+import "pb/unit/account/account.proto";
+
+service Account {
+    rpc CreateAccount(CreateAccountReq) returns (CreateAccountRes);
+    rpc DeleteAccount(DeleteAccountReq) returns (DeleteAccountRes);
+    rpc GetAccount(GetAccountReq) returns (GetAccountRes);
+}
+
+message CreateAccountReq {
+    unit.account.Account account_id = 1;
+}
+
+message CreateAccountRes {
+
+}
+
+message DeleteAccountReq {
+
+}
+
+message DeleteAccountRes {
+
+}
+
+message GetAccountReq {
+
+}
+
+message GetAccountRes {
+    
+}
