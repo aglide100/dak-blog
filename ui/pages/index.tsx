@@ -10,12 +10,10 @@ export default function Home() {
   // }, []);
 
   function getSomeThing() {
-    const grpc = require("grpc");
-    const protoLoader = require("@grpc/proto-loader");
-
-    const PROTO_PATH = "";
-    const SERVER_URI = "0.0.0.0:8888/api";
-
+    // const grpc = require("grpc");
+    // const protoLoader = require("@grpc/proto-loader");
+    // const PROTO_PATH = "";
+    // const SERVER_URI = "0.0.0.0:8888/api";
     // axios.get("https://dak-blog.live/api/test").then((res) => {
     //   const data = res.data;
     //   alert(data);
