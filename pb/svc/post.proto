@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package pb.svc;
+option go_package = "pb/svc";
+
+import "pb/unit/post/post.proto";
+
+service Post {
+    rpc CreatePost(CreatePostReq) returns (CreatePostRes);
+    rpc DeletePost(DeletePostReq) returns (DeletePostRes); 
+    rpc GetPost(GetPostReq) returns (GetPostRes);
+    rpc CreateComment(CreateCommentReq) returns (CreateCommentRes);
+    rpc UpdatePost(UpdatePostReq) returns (UpdatePostRes);
+}
+
+message CreatePostReq{
+    unit.post.Post id =1;
+}
+
+message CreatePostRes{
+
+}
+
+message DeletePostReq{
+
+}
+
+message DeletePostRes{
+
+}
+
+message GetPostReq {
+
+}
+
+message GetPostRes {
+
+}
+
+message CreateCommentReq {
+
+}
+
+message CreateCommentRes {
+
+}
+
+message UpdatePostReq {
+
+}
+
+message UpdatePostRes {
+    
+}

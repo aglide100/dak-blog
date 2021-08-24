@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package pb.svc;
+option go_package = "pb/svc";
+
+service Comment {
+    rpc CreateComment(CreateCommentReq) returns (CreateCommentRes);
+}
+
+message CreateCommentReq{}
+
+message CreateCommentRes{}
