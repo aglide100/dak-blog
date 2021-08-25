@@ -1,5 +1,5 @@
 # Docker-compose.yml이 위치한 디렉토리
-export DockerService=~/dak-blog
+export DockerService=/home/$USER/dak-blog
 
 #!/bin/bash
 
@@ -9,7 +9,7 @@ docker-compose down --remove-orphans
 
 echo "====> Remove docker network"
 cd $DockerService
-docker network prune -f
+echo "yes" | docker network prune
 
 echo "====> Remove unused Conataner"
 cd $DockerService

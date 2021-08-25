@@ -7,6 +7,8 @@
 package svc
 
 import (
+	context "context"
+	grpc "google.golang.org/grpc"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -59,4 +61,46 @@ func file_pb_svc_comment_proto_init() {
 	file_pb_svc_comment_proto_rawDesc = nil
 	file_pb_svc_comment_proto_goTypes = nil
 	file_pb_svc_comment_proto_depIdxs = nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConnInterface
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion6
+
+// CommentClient is the client API for Comment service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type CommentClient interface {
+}
+
+type commentClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCommentClient(cc grpc.ClientConnInterface) CommentClient {
+	return &commentClient{cc}
+}
+
+// CommentServer is the server API for Comment service.
+type CommentServer interface {
+}
+
+// UnimplementedCommentServer can be embedded to have forward compatible implementations.
+type UnimplementedCommentServer struct {
+}
+
+func RegisterCommentServer(s *grpc.Server, srv CommentServer) {
+	s.RegisterService(&_Comment_serviceDesc, srv)
+}
+
+var _Comment_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.svc.Comment",
+	HandlerType: (*CommentServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams:     []grpc.StreamDesc{},
+	Metadata:    "pb/svc/comment.proto",
 }
