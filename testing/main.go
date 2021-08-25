@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 
 	pb_svc "github.com/aglide100/dak-blog/pb/svc"
-	pb_unit_post "github.com/aglide100/dak-blog/pb/unit/post"
+	"github.com/aglide100/dak-blog/pb/unit/post"
 )
 
 const (
@@ -25,8 +25,10 @@ func main() {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
+	str := &post.ID{Uuid: "asdas"}
+	id := &post.Post{Id : str }
 
-	res, err := client.GetPost(ctx, &pb_svc.GetPostReq{Id : pb_unit_post.ID{uuid:""}})
+	res, err := client.GetPost(ctx, &pb_svc.GetPostReq{Id : id})
 	if err != nil {
 		log.Fatalf("Can't receive anything! %v", err)
 	}
