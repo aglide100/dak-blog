@@ -31,7 +31,7 @@ services:
     links:
       - postgres:app_db
     expose:
-      - 8888
+      - 50055
     hostname: api
     networks:
       - docker_network

@@ -7,7 +7,7 @@ export default {
   component: Footer,
 } as Meta;
 
-const Template: Story<FooterProps> = (args) => <Footer {...args} />
+const Template: Story<FooterProps> = (args) => <Footer {...args} />;
 
 export const FooterInfo = Template.bind({});
 FooterInfo.args = {};

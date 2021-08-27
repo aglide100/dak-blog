@@ -14,15 +14,15 @@ service Post {
 }
 
 message CreatePostReq{
-    unit.post.Post id =1;
+    unit.post.Post Post = 1;
 }
 
 message CreatePostRes{
-
+    unit.post.Post Post = 1;
 }
 
 message DeletePostReq{
-
+    unit.post.Post id = 1;
 }
 
 message DeletePostRes{
@@ -30,11 +30,11 @@ message DeletePostRes{
 }
 
 message GetPostReq {
-
+    unit.post.Post id = 1;
 }
 
 message GetPostRes {
-
+    unit.post.Post Post = 1;
 }
 
 message CreateCommentReq {
@@ -50,5 +50,5 @@ message UpdatePostReq {
 }
 
 message UpdatePostRes {
-    
+
 }

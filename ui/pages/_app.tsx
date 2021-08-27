@@ -2,7 +2,7 @@ import React from "react";
 import { Header, HeaderProps } from "../src/components/Header/Header";
 import { Footer } from "../src/components/Footer/Footer";
 import type { AppProps } from "next/app";
-import "../src/_css/common.css"
+import "../src/_css/common.css";
 import "../styles/globals.css";
 import { useRouter } from "next/router";
 import Head from "next/head";

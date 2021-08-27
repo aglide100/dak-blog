@@ -6,13 +6,22 @@ option go_package = "github.com/aglide100/dak-blog/pb/unit/post";
 import "pb/unit/comment/comment.proto";
 
 message Post {
-    int64 id = 1;
-    string title = 2;
-    string author = 3;
-    string written_date = 4;
-    string content = 5;
-    string thumbnail = 6;
-    repeated string pictureURLs = 7;
+    ID id = 1;
+    Spec spec = 2;
+    Comments commets = 3;
+}
+
+message ID {
+    string uuid =1;
+}
+
+message Spec {
+    string title = 1;
+    string author = 2;
+    string written_date = 3;
+    string content = 4;
+    string thumbnail = 5;
+    repeated string pictureURLs = 6;
 }
 
 message Comments {

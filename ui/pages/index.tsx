@@ -1,23 +1,23 @@
 import React from "react";
+import { PostClient } from "../gen/pb/svc/post_pb_service";
+import { GetPostReq } from "../gen/pb/svc/post_pb";
 // import React, { useRef, useEffect, useState } from "react";
-// import { select, utcParse } from "d3";
 import Head from "next/head";
 
-export default function Home() {
-  // const svgRef = useRef();
-  // useEffect(() => {
-  //   const svg = select(svgRef.current);
-  // }, []);
+var postService = new PostClient("http://0.0.0.0:50055");
 
+export default function Home() {
   function getSomeThing() {
-    // const grpc = require("grpc");
-    // const protoLoader = require("@grpc/proto-loader");
-    // const PROTO_PATH = "";
-    // const SERVER_URI = "0.0.0.0:8888/api";
-    // axios.get("https://dak-blog.live/api/test").then((res) => {
-    //   const data = res.data;
-    //   alert(data);
-    // });
+    var getPostReq = new GetPostReq();
+    // getPostReq.setId("Hello");
+
+    postService.getPost(getPostReq, function (err, res) {
+      var post = res?.toObject();
+
+      console.log(post);
+    });
+
+    // const postService = new PostServiceClient
   }
 
   return (

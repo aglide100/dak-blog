@@ -80,8 +80,6 @@ Container
 
 > [docker][dockerlink]
 
-> protoc -I=. --go_out=pb/unit/post/ pb/unit/post/post.proto
-
 ---
 
 ## 4. preview
