@@ -16,6 +16,6 @@ func NewPostServiceController() *PostService {
 }
 
 func (hdl *PostService) GetPost(ctx context.Context, in *pb_svc.GetPostReq) (*pb_svc.GetPostRes, error) {
-	log.Printf("Received: %v")
+	log.Printf("Received: %v", in.GetId().Id)
 	return &pb_svc.GetPostRes{}, nil
 }

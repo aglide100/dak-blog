@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import classnames from "classnames"
+import React from "react";
+import classnames from "classnames";
 
 export type ButtonProps = {
   label: string;
