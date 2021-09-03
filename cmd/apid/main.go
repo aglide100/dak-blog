@@ -36,11 +36,12 @@ func realMain() error {
 	defer ln.Close()
 
 	var opts []grpc.ServerOption
-	tls := false
+	tls := true
 	if tls {
 		fmt.Println("Using tls keys")
+
 		serverCrt := "keys/server.crt"
-		serverPem := "keys/server.pem"
+		serverPem := "keys/server.key"
 		creds, err := credentials.NewServerTLSFromFile(serverCrt, serverPem)
 		if err != nil {
 			log.Fatalf("fail to load creds: %v", err)
