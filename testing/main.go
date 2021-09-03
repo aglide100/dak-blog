@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	address = "0.0.0.0:50055"
+	address = "0.0.0.0:50011"
 )
 
 func main() {

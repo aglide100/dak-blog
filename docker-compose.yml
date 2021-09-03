@@ -3,18 +3,15 @@ x-services-volume: &services-volume
   type: bind
 
 services:
-  nginx:
-    container_name: nginx
-    build:
-      context: ./cmd/nginx
-    restart: always
-    hostname: nginx
-    networks:
-      - docker_network
-    ports:
-      - "3010:80"
-    depends_on:
-      - node
+  # envoy:
+  #   container_name: envoy
+  #   build:
+  #     context: ./cmd/envoy
+  #   hostname: envoy
+  #   networks:
+  #     - docker_network
+  #   ports:
+  #     - 9901:9901
   node:
     container_name: node
     build:
@@ -22,17 +19,18 @@ services:
     hostname: node
     networks:
       - docker_network
-    expose:
-      - 3000
+    ports:
+      - 80:80
+      - 3000:3000
   api:
-    container_name: api
+    container_name: go-server
     build:
       context: ./
     links:
       - postgres:app_db
-    expose:
-      - 50055
-    hostname: api
+    ports:
+      - 9011:50011
+    hostname: go-server
     networks:
       - docker_network
     environment:

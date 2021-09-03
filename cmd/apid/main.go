@@ -29,18 +29,19 @@ func main() {
 }
 
 func realMain() error {
-	ln, err := net.Listen("tcp", "0.0.0.0:50055")
+	ln, err := net.Listen("tcp", "0.0.0.0:50011")
 	if err != nil {
 		log.Printf("Can't listen by tcp")
 	}
 	defer ln.Close()
 
 	var opts []grpc.ServerOption
-	tls := false
+	tls := true
 	if tls {
 		fmt.Println("Using tls keys")
+
 		serverCrt := "keys/server.crt"
-		serverPem := "keys/server.pem"
+		serverPem := "keys/server.key"
 		creds, err := credentials.NewServerTLSFromFile(serverCrt, serverPem)
 		if err != nil {
 			log.Fatalf("fail to load creds: %v", err)
@@ -48,14 +49,14 @@ func realMain() error {
 		opts = append(opts, grpc.Creds(creds))
 	}
 
-	postCtrl := controllers.NewPostServiceController()
-	accountCtrl := controllers.NewAccountServiceController()
-	commentCtrl := controllers.NewAccountServiceController()
+	postSrv := controllers.NewPostServiceController()
+	accountSrv := controllers.NewAccountServiceController()
+	commentSrv := controllers.NewAccountServiceController()
 	grpcServer := grpc.NewServer(opts...)
 
-	pb_svc.RegisterPostServer(grpcServer, postCtrl)
-	pb_svc.RegisterAccountServer(grpcServer, accountCtrl)
-	pb_svc.RegisterCommentServer(grpcServer, commentCtrl)
+	pb_svc.RegisterPostServer(grpcServer, postSrv)
+	pb_svc.RegisterAccountServer(grpcServer, accountSrv)
+	pb_svc.RegisterCommentServer(grpcServer, commentSrv)
 
 	log.Println("Starting grpc server...")
 	err = grpcServer.Serve(ln)

@@ -1,30 +1,27 @@
-// package: pb.unit.post
-// file: pb/unit/post/post.proto
+import * as jspb from 'google-protobuf'
 
-import * as jspb from "google-protobuf";
-import * as pb_unit_comment_comment_pb from "../../../pb/unit/comment/comment_pb";
+import * as pb_unit_comment_comment_pb from '../../../pb/unit/comment/comment_pb';
+
 
 export class Post extends jspb.Message {
-  hasId(): boolean;
-  clearId(): void;
   getId(): ID | undefined;
-  setId(value?: ID): void;
+  setId(value?: ID): Post;
+  hasId(): boolean;
+  clearId(): Post;
 
-  hasSpec(): boolean;
-  clearSpec(): void;
   getSpec(): Spec | undefined;
-  setSpec(value?: Spec): void;
+  setSpec(value?: Spec): Post;
+  hasSpec(): boolean;
+  clearSpec(): Post;
 
-  hasCommets(): boolean;
-  clearCommets(): void;
   getCommets(): Comments | undefined;
-  setCommets(value?: Comments): void;
+  setCommets(value?: Comments): Post;
+  hasCommets(): boolean;
+  clearCommets(): Post;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Post.AsObject;
   static toObject(includeInstance: boolean, msg: Post): Post.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
   static serializeBinaryToWriter(message: Post, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Post;
   static deserializeBinaryFromReader(message: Post, reader: jspb.BinaryReader): Post;
@@ -40,13 +37,11 @@ export namespace Post {
 
 export class ID extends jspb.Message {
   getUuid(): string;
-  setUuid(value: string): void;
+  setUuid(value: string): ID;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ID.AsObject;
   static toObject(includeInstance: boolean, msg: ID): ID.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
   static serializeBinaryToWriter(message: ID, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): ID;
   static deserializeBinaryFromReader(message: ID, reader: jspb.BinaryReader): ID;
@@ -60,30 +55,28 @@ export namespace ID {
 
 export class Spec extends jspb.Message {
   getTitle(): string;
-  setTitle(value: string): void;
+  setTitle(value: string): Spec;
 
   getAuthor(): string;
-  setAuthor(value: string): void;
+  setAuthor(value: string): Spec;
 
   getWrittenDate(): string;
-  setWrittenDate(value: string): void;
+  setWrittenDate(value: string): Spec;
 
   getContent(): string;
-  setContent(value: string): void;
+  setContent(value: string): Spec;
 
   getThumbnail(): string;
-  setThumbnail(value: string): void;
+  setThumbnail(value: string): Spec;
 
-  clearPictureurlsList(): void;
   getPictureurlsList(): Array<string>;
-  setPictureurlsList(value: Array<string>): void;
-  addPictureurls(value: string, index?: number): string;
+  setPictureurlsList(value: Array<string>): Spec;
+  clearPictureurlsList(): Spec;
+  addPictureurls(value: string, index?: number): Spec;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Spec.AsObject;
   static toObject(includeInstance: boolean, msg: Spec): Spec.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
   static serializeBinaryToWriter(message: Spec, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Spec;
   static deserializeBinaryFromReader(message: Spec, reader: jspb.BinaryReader): Spec;
@@ -101,16 +94,14 @@ export namespace Spec {
 }
 
 export class Comments extends jspb.Message {
-  clearCommentList(): void;
   getCommentList(): Array<pb_unit_comment_comment_pb.Comment>;
-  setCommentList(value: Array<pb_unit_comment_comment_pb.Comment>): void;
+  setCommentList(value: Array<pb_unit_comment_comment_pb.Comment>): Comments;
+  clearCommentList(): Comments;
   addComment(value?: pb_unit_comment_comment_pb.Comment, index?: number): pb_unit_comment_comment_pb.Comment;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Comments.AsObject;
   static toObject(includeInstance: boolean, msg: Comments): Comments.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
   static serializeBinaryToWriter(message: Comments, writer: jspb.BinaryWriter): void;
   static deserializeBinary(bytes: Uint8Array): Comments;
   static deserializeBinaryFromReader(message: Comments, reader: jspb.BinaryReader): Comments;
