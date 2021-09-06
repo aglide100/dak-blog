@@ -15,7 +15,7 @@ export default function Home() {
     getPostReq.setId(post);
     grpc.unary(Post.GetPost, {
       request: getPostReq,
-      host: "https://localhost:8089",
+      host: "https://dak-blog:8089",
       onEnd: (res) => {
         const { status, statusMessage, headers, message, trailers } = res;
         console.log("getPost.onEnd.status", status, statusMessage);
