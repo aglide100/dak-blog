@@ -14,33 +14,10 @@ writing some code or project at own blog
 
     docker-compose up -d
 
-    OR
-
-    . dc.sh
-
-OR
-
-Just run web only
-
-Move the ui directory and
-
-    cd ui/
-
-> ### run storybook on your local
-
-    npm run storybook
-
-> ### run next js on your local
-
-    npm run dev
-
-> ### run npm build
-
-    npm run build
-
 ## 3. Dependency
 
 This project used
+
 
 Github CI/CD
 
@@ -64,13 +41,15 @@ API Server
 
 > [golang][golanglink]
 
+> [grpc-web][grpc-weblink]
+
 UI develop testing tool
 
 > [stoybook][storybooklink]
 
-LoadBalance
+<strike>LoadBalance</strike>
 
-> [nginx][nginxlink]
+<strike>> [nginx][nginxlink]</strike>
 
 Database
 
@@ -102,3 +81,4 @@ vercel app
 [postgesqllink]: https://www.postgresql.org/
 [dockerlink]: https://www.docker.com/
 [nginxlink]: https://www.nginx.com/
+[grpc-weblink]: https://github.com/improbable-eng/grpc-web
