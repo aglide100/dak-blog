@@ -1,16 +1,20 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net"
+	"net/http"
 	"os"
+	"sync"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
 	pb_svc "github.com/aglide100/dak-blog/pb/svc"
 	"github.com/aglide100/dak-blog/pkg/svc/controllers"
+	"github.com/improbable-eng/grpc-web/go/grpcweb"
 )
 
 var (
@@ -19,6 +23,8 @@ var (
 	dbUser = os.Getenv("DB_USER")
 	dbPasswd = os.Getenv("DB_PASSWORD")
 	dbName = os.Getenv("DB_NAME")
+	serverCrt = "keys/server.crt"
+	serverKey = "keys/server.key"
 )
 
 func main() {
@@ -28,21 +34,25 @@ func main() {
 	}
 }
 
-func realMain() error {
-	ln, err := net.Listen("tcp", "0.0.0.0:50011")
+func realMain() error {	
+	gRPCWebAddr := flag.String("grpc.addr", "0.0.0.0:8080", "grpc address")
+	usingTls := flag.Bool("grpc.tls", false, "using http2")
+
+	gRPCWebAddrL, err := net.Listen("tcp", *gRPCWebAddr)
 	if err != nil {
-		log.Printf("Can't listen by tcp")
+		return err
 	}
-	defer ln.Close()
+	defer gRPCWebAddrL.Close()
+
+	var wait sync.WaitGroup
+	wait.Add(1)
 
 	var opts []grpc.ServerOption
-	tls := true
+	tls := *usingTls
 	if tls {
 		fmt.Println("Using tls keys")
 
-		serverCrt := "keys/server.crt"
-		serverPem := "keys/server.key"
-		creds, err := credentials.NewServerTLSFromFile(serverCrt, serverPem)
+		creds, err := credentials.NewServerTLSFromFile(serverCrt, serverKey)
 		if err != nil {
 			log.Fatalf("fail to load creds: %v", err)
 		}
@@ -53,15 +63,51 @@ func realMain() error {
 	accountSrv := controllers.NewAccountServiceController()
 	commentSrv := controllers.NewAccountServiceController()
 	grpcServer := grpc.NewServer(opts...)
-
+	
 	pb_svc.RegisterPostServer(grpcServer, postSrv)
 	pb_svc.RegisterAccountServer(grpcServer, accountSrv)
 	pb_svc.RegisterCommentServer(grpcServer, commentSrv)
 
-	log.Println("Starting grpc server...")
-	err = grpcServer.Serve(ln)
-	if err != nil {
-		log.Printf("Can't serve!")
-	}
+
+	go func() error {
+		wrappedServer := grpcweb.WrapServer(grpcServer, grpcweb.WithOriginFunc(func(origin string) bool {
+			// for test, TODO fix here
+			return true
+		}))
+
+		handler := http.Handler(http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
+			log.Println("in handler....")
+			if wrappedServer.IsGrpcWebRequest(req) || wrappedServer.IsAcceptableGrpcCorsRequest(req) {
+				wrappedServer.ServeHTTP(resp, req)
+			}
+		}))
+
+		// handler := func(resp http.ResponseWriter, req *http.Request) {
+		// 	log.Println("in handler....")
+		// 	if wrappedServer.IsGrpcWebRequest(req) || wrappedServer.IsAcceptableGrpcCorsRequest(req) {
+		// 		wrappedServer.ServeHTTP(resp, req)
+		// 	}
+		// }
+
+		// httpServer := &http.Server{
+		// 	Addr: *gRPCWebAddr,
+		// 	Handler: handler,
+		// }
+
+		log.Printf("Starting grpc server... %s", *gRPCWebAddr)
+		err := http.ListenAndServeTLS("0.0.0.0:8089", serverCrt , serverKey , handler)
+		// err := http.ListenAndServe("0.0.0.0:8089", handler)
+		// 
+		// err := httpServer.ServeTLS(gRPCWebAddrL,serverCrt, serverKey)
+		if err != nil {
+			log.Fatalln("When error at serving grpc web... ", err)
+		} 
+
+		return err
+	} ()
+
+	wait.Wait()
+	
 	return nil
 }
+

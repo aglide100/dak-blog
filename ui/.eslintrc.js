@@ -13,7 +13,12 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint", "react-hooks"],
-  ignorePatterns: ["gen/pb", "gen/pb/svc/"],
+  ignorePatterns: [
+    "gen/pb/svc/*.js",
+    "gen/pb/svc/*.ts",
+    "gen/pb/unit/**/*.js",
+    "gen/pb/unit/**/*.js",
+  ],
   rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
@@ -23,5 +28,6 @@ module.exports = {
     "no-var": ["off"],
     "require-jsdoc": ["off"],
     "space-before-function-paren": ["off"],
+    camelcase: ["off"],
   },
 };

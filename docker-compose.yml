@@ -12,6 +12,20 @@ services:
   #     - docker_network
   #   ports:
   #     - 9901:9901
+  nginx:
+    container_name: nginx
+    build:
+      context: ./cmd/nginx
+    hostname: nginx
+    networks:
+      - docker_network
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - <<: *services-volume
+        source: keys/
+        target: /etc/cert/keys/
   node:
     container_name: node
     build:
@@ -20,7 +34,6 @@ services:
     networks:
       - docker_network
     ports:
-      - 80:80
       - 3000:3000
   api:
     container_name: go-server
@@ -28,8 +41,12 @@ services:
       context: ./
     links:
       - postgres:app_db
+    volumes:
+      - <<: *services-volume
+        source: keys/
+        target: /go/src/github.com/aglide100/dak-blog/keys/
     ports:
-      - 9011:50011
+      - 8080:8080
     hostname: go-server
     networks:
       - docker_network

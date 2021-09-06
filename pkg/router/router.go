@@ -41,6 +41,7 @@ func (rtr *Router) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		if rule.method != method {
 			continue
 		}
+		
 		if !rule.pattern.MatchString(path) {
 			continue
 		}
