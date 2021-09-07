@@ -23,8 +23,6 @@ var (
 	dbUser = os.Getenv("DB_USER")
 	dbPasswd = os.Getenv("DB_PASSWORD")
 	dbName = os.Getenv("DB_NAME")
-	serverCrt = "keys/server.crt"
-	serverKey = "keys/server.key"
 )
 
 func main() {
@@ -35,8 +33,10 @@ func main() {
 }
 
 func realMain() error {	
-	gRPCWebAddr := flag.String("grpc.addr", "0.0.0.0:8080", "grpc address")
-	usingTls := flag.Bool("grpc.tls", false, "using http2")
+	gRPCWebAddr := flag.String("grpc.addr", "0.0.0.0:8089", "grpc address")
+	usingTls := flag.Bool("grpc.tls", true, "using http2")
+	serverCrt := flag.String("cert.crt", "keys/server.crt", "crt file location")
+	serverKey := flag.String("cert.key", "keys/server.key", "ket file location")
 
 	gRPCWebAddrL, err := net.Listen("tcp", *gRPCWebAddr)
 	if err != nil {
@@ -52,7 +52,7 @@ func realMain() error {
 	if tls {
 		fmt.Println("Using tls keys")
 
-		creds, err := credentials.NewServerTLSFromFile(serverCrt, serverKey)
+		creds, err := credentials.NewServerTLSFromFile(*serverCrt, *serverKey)
 		if err != nil {
 			log.Fatalf("fail to load creds: %v", err)
 		}
@@ -68,7 +68,6 @@ func realMain() error {
 	pb_svc.RegisterAccountServer(grpcServer, accountSrv)
 	pb_svc.RegisterCommentServer(grpcServer, commentSrv)
 
-
 	go func() error {
 		wrappedServer := grpcweb.WrapServer(grpcServer, grpcweb.WithOriginFunc(func(origin string) bool {
 			// for test, TODO fix here
@@ -76,29 +75,20 @@ func realMain() error {
 		}))
 
 		handler := http.Handler(http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
-			log.Println("in handler....")
 			if wrappedServer.IsGrpcWebRequest(req) || wrappedServer.IsAcceptableGrpcCorsRequest(req) {
 				wrappedServer.ServeHTTP(resp, req)
 			}
 		}))
 
-		// handler := func(resp http.ResponseWriter, req *http.Request) {
-		// 	log.Println("in handler....")
-		// 	if wrappedServer.IsGrpcWebRequest(req) || wrappedServer.IsAcceptableGrpcCorsRequest(req) {
-		// 		wrappedServer.ServeHTTP(resp, req)
-		// 	}
-		// }
-
-		// httpServer := &http.Server{
-		// 	Addr: *gRPCWebAddr,
-		// 	Handler: handler,
-		// }
-
 		log.Printf("Starting grpc server... %s", *gRPCWebAddr)
-		err := http.ListenAndServeTLS("0.0.0.0:8089", serverCrt , serverKey , handler)
-		// err := http.ListenAndServe("0.0.0.0:8089", handler)
-		// 
-		// err := httpServer.ServeTLS(gRPCWebAddrL,serverCrt, serverKey)
+		var err error
+		if *usingTls { 
+			err = http.ServeTLS(gRPCWebAddrL, handler, *serverCrt , *serverKey)
+		} else {
+			log.Println("starting without tls....")
+			err = http.Serve(gRPCWebAddrL, handler)
+		}
+
 		if err != nil {
 			log.Fatalln("When error at serving grpc web... ", err)
 		} 

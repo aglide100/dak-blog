@@ -29,4 +29,4 @@ jobs:
             './*' => ${{ secrets.PATH }}
           last_ssh: |
             cd ${{ secrets.PATH }}
-            ./dc.sh
+            ./deploy.sh
