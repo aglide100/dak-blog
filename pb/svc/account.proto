@@ -12,7 +12,7 @@ service Account {
 }
 
 message CreateAccountReq {
-    unit.account.Account account_id = 1;
+    unit.account.Account Account = 1;
 }
 
 message CreateAccountRes {
@@ -20,7 +20,7 @@ message CreateAccountRes {
 }
 
 message DeleteAccountReq {
-
+    unit.account.Account id = 1;
 }
 
 message DeleteAccountRes {
@@ -28,9 +28,9 @@ message DeleteAccountRes {
 }
 
 message GetAccountReq {
-
+    unit.account.Account token = 1;
 }
 
 message GetAccountRes {
-    
+    unit.account.Account Account = 1;
 }

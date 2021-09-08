@@ -1,4 +1,4 @@
-export DockerService=/home/$USER/dak-blog
+export DockerService=/$USER/dak-blog
 
 #!/bin/bash
 

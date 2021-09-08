@@ -4,6 +4,7 @@ package pb.svc;
 option go_package = "pb/svc";
 
 import "pb/unit/post/post.proto";
+import "pb/unit/comment/comment.proto";
 
 service Post {
     rpc CreatePost(CreatePostReq) returns (CreatePostRes);
@@ -38,7 +39,8 @@ message GetPostRes {
 }
 
 message CreateCommentReq {
-
+    unit.post.Post id = 1;
+    unit.comment.Comment comment = 2;
 }
 
 message CreateCommentRes {
@@ -46,7 +48,7 @@ message CreateCommentRes {
 }
 
 message UpdatePostReq {
-
+    unit.post.Post Post =1;
 }
 
 message UpdatePostRes {

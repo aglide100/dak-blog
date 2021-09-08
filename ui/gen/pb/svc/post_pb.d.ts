@@ -3,6 +3,7 @@
 
 import * as jspb from "google-protobuf";
 import * as pb_unit_post_post_pb from "../../pb/unit/post/post_pb";
+import * as pb_unit_comment_comment_pb from "../../pb/unit/comment/comment_pb";
 
 export class CreatePostReq extends jspb.Message {
   hasPost(): boolean;
@@ -131,6 +132,16 @@ export namespace GetPostRes {
 }
 
 export class CreateCommentReq extends jspb.Message {
+  hasId(): boolean;
+  clearId(): void;
+  getId(): pb_unit_post_post_pb.Post | undefined;
+  setId(value?: pb_unit_post_post_pb.Post): void;
+
+  hasComment(): boolean;
+  clearComment(): void;
+  getComment(): pb_unit_comment_comment_pb.Comment | undefined;
+  setComment(value?: pb_unit_comment_comment_pb.Comment): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateCommentReq.AsObject;
   static toObject(includeInstance: boolean, msg: CreateCommentReq): CreateCommentReq.AsObject;
@@ -143,6 +154,8 @@ export class CreateCommentReq extends jspb.Message {
 
 export namespace CreateCommentReq {
   export type AsObject = {
+    id?: pb_unit_post_post_pb.Post.AsObject,
+    comment?: pb_unit_comment_comment_pb.Comment.AsObject,
   }
 }
 
@@ -163,6 +176,11 @@ export namespace CreateCommentRes {
 }
 
 export class UpdatePostReq extends jspb.Message {
+  hasPost(): boolean;
+  clearPost(): void;
+  getPost(): pb_unit_post_post_pb.Post | undefined;
+  setPost(value?: pb_unit_post_post_pb.Post): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdatePostReq.AsObject;
   static toObject(includeInstance: boolean, msg: UpdatePostReq): UpdatePostReq.AsObject;
@@ -175,6 +193,7 @@ export class UpdatePostReq extends jspb.Message {
 
 export namespace UpdatePostReq {
   export type AsObject = {
+    post?: pb_unit_post_post_pb.Post.AsObject,
   }
 }
 

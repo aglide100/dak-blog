@@ -6,10 +6,15 @@ option go_package = "github.com/aglide100/dak-blog/pb/unit/account";
 message Account {
     ID id = 1;
     Spec spec = 2;
+    Token token = 3;
 }
 
 message ID {
     string uuid = 1;
+}
+
+message Token {
+    string token = 1;
 }
 
 message Spec {

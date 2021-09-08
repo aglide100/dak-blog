@@ -181,7 +181,7 @@ proto.pb.svc.CreateAccountReq.prototype.toObject = function(opt_includeInstance)
  */
 proto.pb.svc.CreateAccountReq.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accountId: (f = msg.getAccountId()) && pb_unit_account_account_pb.Account.toObject(includeInstance, f)
+    account: (f = msg.getAccount()) && pb_unit_account_account_pb.Account.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -221,7 +221,7 @@ proto.pb.svc.CreateAccountReq.deserializeBinaryFromReader = function(msg, reader
     case 1:
       var value = new pb_unit_account_account_pb.Account;
       reader.readMessage(value,pb_unit_account_account_pb.Account.deserializeBinaryFromReader);
-      msg.setAccountId(value);
+      msg.setAccount(value);
       break;
     default:
       reader.skipField();
@@ -252,7 +252,7 @@ proto.pb.svc.CreateAccountReq.prototype.serializeBinary = function() {
  */
 proto.pb.svc.CreateAccountReq.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAccountId();
+  f = message.getAccount();
   if (f != null) {
     writer.writeMessage(
       1,
@@ -264,10 +264,10 @@ proto.pb.svc.CreateAccountReq.serializeBinaryToWriter = function(message, writer
 
 
 /**
- * optional pb.unit.account.Account account_id = 1;
+ * optional pb.unit.account.Account Account = 1;
  * @return {?proto.pb.unit.account.Account}
  */
-proto.pb.svc.CreateAccountReq.prototype.getAccountId = function() {
+proto.pb.svc.CreateAccountReq.prototype.getAccount = function() {
   return /** @type{?proto.pb.unit.account.Account} */ (
     jspb.Message.getWrapperField(this, pb_unit_account_account_pb.Account, 1));
 };
@@ -277,7 +277,7 @@ proto.pb.svc.CreateAccountReq.prototype.getAccountId = function() {
  * @param {?proto.pb.unit.account.Account|undefined} value
  * @return {!proto.pb.svc.CreateAccountReq} returns this
 */
-proto.pb.svc.CreateAccountReq.prototype.setAccountId = function(value) {
+proto.pb.svc.CreateAccountReq.prototype.setAccount = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
@@ -286,8 +286,8 @@ proto.pb.svc.CreateAccountReq.prototype.setAccountId = function(value) {
  * Clears the message field making it undefined.
  * @return {!proto.pb.svc.CreateAccountReq} returns this
  */
-proto.pb.svc.CreateAccountReq.prototype.clearAccountId = function() {
-  return this.setAccountId(undefined);
+proto.pb.svc.CreateAccountReq.prototype.clearAccount = function() {
+  return this.setAccount(undefined);
 };
 
 
@@ -295,7 +295,7 @@ proto.pb.svc.CreateAccountReq.prototype.clearAccountId = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.pb.svc.CreateAccountReq.prototype.hasAccountId = function() {
+proto.pb.svc.CreateAccountReq.prototype.hasAccount = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -433,7 +433,7 @@ proto.pb.svc.DeleteAccountReq.prototype.toObject = function(opt_includeInstance)
  */
 proto.pb.svc.DeleteAccountReq.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    id: (f = msg.getId()) && pb_unit_account_account_pb.Account.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -470,6 +470,11 @@ proto.pb.svc.DeleteAccountReq.deserializeBinaryFromReader = function(msg, reader
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new pb_unit_account_account_pb.Account;
+      reader.readMessage(value,pb_unit_account_account_pb.Account.deserializeBinaryFromReader);
+      msg.setId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -499,6 +504,51 @@ proto.pb.svc.DeleteAccountReq.prototype.serializeBinary = function() {
  */
 proto.pb.svc.DeleteAccountReq.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      pb_unit_account_account_pb.Account.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional pb.unit.account.Account id = 1;
+ * @return {?proto.pb.unit.account.Account}
+ */
+proto.pb.svc.DeleteAccountReq.prototype.getId = function() {
+  return /** @type{?proto.pb.unit.account.Account} */ (
+    jspb.Message.getWrapperField(this, pb_unit_account_account_pb.Account, 1));
+};
+
+
+/**
+ * @param {?proto.pb.unit.account.Account|undefined} value
+ * @return {!proto.pb.svc.DeleteAccountReq} returns this
+*/
+proto.pb.svc.DeleteAccountReq.prototype.setId = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.pb.svc.DeleteAccountReq} returns this
+ */
+proto.pb.svc.DeleteAccountReq.prototype.clearId = function() {
+  return this.setId(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.pb.svc.DeleteAccountReq.prototype.hasId = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -635,7 +685,7 @@ proto.pb.svc.GetAccountReq.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.svc.GetAccountReq.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    token: (f = msg.getToken()) && pb_unit_account_account_pb.Account.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -672,6 +722,11 @@ proto.pb.svc.GetAccountReq.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new pb_unit_account_account_pb.Account;
+      reader.readMessage(value,pb_unit_account_account_pb.Account.deserializeBinaryFromReader);
+      msg.setToken(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -701,6 +756,51 @@ proto.pb.svc.GetAccountReq.prototype.serializeBinary = function() {
  */
 proto.pb.svc.GetAccountReq.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getToken();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      pb_unit_account_account_pb.Account.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional pb.unit.account.Account token = 1;
+ * @return {?proto.pb.unit.account.Account}
+ */
+proto.pb.svc.GetAccountReq.prototype.getToken = function() {
+  return /** @type{?proto.pb.unit.account.Account} */ (
+    jspb.Message.getWrapperField(this, pb_unit_account_account_pb.Account, 1));
+};
+
+
+/**
+ * @param {?proto.pb.unit.account.Account|undefined} value
+ * @return {!proto.pb.svc.GetAccountReq} returns this
+*/
+proto.pb.svc.GetAccountReq.prototype.setToken = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.pb.svc.GetAccountReq} returns this
+ */
+proto.pb.svc.GetAccountReq.prototype.clearToken = function() {
+  return this.setToken(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.pb.svc.GetAccountReq.prototype.hasToken = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -736,7 +836,7 @@ proto.pb.svc.GetAccountRes.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.svc.GetAccountRes.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    account: (f = msg.getAccount()) && pb_unit_account_account_pb.Account.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -773,6 +873,11 @@ proto.pb.svc.GetAccountRes.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new pb_unit_account_account_pb.Account;
+      reader.readMessage(value,pb_unit_account_account_pb.Account.deserializeBinaryFromReader);
+      msg.setAccount(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -802,6 +907,51 @@ proto.pb.svc.GetAccountRes.prototype.serializeBinary = function() {
  */
 proto.pb.svc.GetAccountRes.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getAccount();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      pb_unit_account_account_pb.Account.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional pb.unit.account.Account Account = 1;
+ * @return {?proto.pb.unit.account.Account}
+ */
+proto.pb.svc.GetAccountRes.prototype.getAccount = function() {
+  return /** @type{?proto.pb.unit.account.Account} */ (
+    jspb.Message.getWrapperField(this, pb_unit_account_account_pb.Account, 1));
+};
+
+
+/**
+ * @param {?proto.pb.unit.account.Account|undefined} value
+ * @return {!proto.pb.svc.GetAccountRes} returns this
+*/
+proto.pb.svc.GetAccountRes.prototype.setAccount = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.pb.svc.GetAccountRes} returns this
+ */
+proto.pb.svc.GetAccountRes.prototype.clearAccount = function() {
+  return this.setAccount(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.pb.svc.GetAccountRes.prototype.hasAccount = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 

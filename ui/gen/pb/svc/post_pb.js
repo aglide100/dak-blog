@@ -17,6 +17,8 @@ var global = Function('return this')();
 
 var pb_unit_post_post_pb = require('../../pb/unit/post/post_pb.js');
 goog.object.extend(proto, pb_unit_post_post_pb);
+var pb_unit_comment_comment_pb = require('../../pb/unit/comment/comment_pb.js');
+goog.object.extend(proto, pb_unit_comment_comment_pb);
 goog.exportSymbol('proto.pb.svc.CreateCommentReq', null, global);
 goog.exportSymbol('proto.pb.svc.CreateCommentRes', null, global);
 goog.exportSymbol('proto.pb.svc.CreatePostReq', null, global);
@@ -1125,7 +1127,8 @@ proto.pb.svc.CreateCommentReq.prototype.toObject = function(opt_includeInstance)
  */
 proto.pb.svc.CreateCommentReq.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    id: (f = msg.getId()) && pb_unit_post_post_pb.Post.toObject(includeInstance, f),
+    comment: (f = msg.getComment()) && pb_unit_comment_comment_pb.Comment.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1162,6 +1165,16 @@ proto.pb.svc.CreateCommentReq.deserializeBinaryFromReader = function(msg, reader
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new pb_unit_post_post_pb.Post;
+      reader.readMessage(value,pb_unit_post_post_pb.Post.deserializeBinaryFromReader);
+      msg.setId(value);
+      break;
+    case 2:
+      var value = new pb_unit_comment_comment_pb.Comment;
+      reader.readMessage(value,pb_unit_comment_comment_pb.Comment.deserializeBinaryFromReader);
+      msg.setComment(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1191,6 +1204,96 @@ proto.pb.svc.CreateCommentReq.prototype.serializeBinary = function() {
  */
 proto.pb.svc.CreateCommentReq.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      pb_unit_post_post_pb.Post.serializeBinaryToWriter
+    );
+  }
+  f = message.getComment();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      pb_unit_comment_comment_pb.Comment.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional pb.unit.post.Post id = 1;
+ * @return {?proto.pb.unit.post.Post}
+ */
+proto.pb.svc.CreateCommentReq.prototype.getId = function() {
+  return /** @type{?proto.pb.unit.post.Post} */ (
+    jspb.Message.getWrapperField(this, pb_unit_post_post_pb.Post, 1));
+};
+
+
+/**
+ * @param {?proto.pb.unit.post.Post|undefined} value
+ * @return {!proto.pb.svc.CreateCommentReq} returns this
+*/
+proto.pb.svc.CreateCommentReq.prototype.setId = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.pb.svc.CreateCommentReq} returns this
+ */
+proto.pb.svc.CreateCommentReq.prototype.clearId = function() {
+  return this.setId(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.pb.svc.CreateCommentReq.prototype.hasId = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional pb.unit.comment.Comment comment = 2;
+ * @return {?proto.pb.unit.comment.Comment}
+ */
+proto.pb.svc.CreateCommentReq.prototype.getComment = function() {
+  return /** @type{?proto.pb.unit.comment.Comment} */ (
+    jspb.Message.getWrapperField(this, pb_unit_comment_comment_pb.Comment, 2));
+};
+
+
+/**
+ * @param {?proto.pb.unit.comment.Comment|undefined} value
+ * @return {!proto.pb.svc.CreateCommentReq} returns this
+*/
+proto.pb.svc.CreateCommentReq.prototype.setComment = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.pb.svc.CreateCommentReq} returns this
+ */
+proto.pb.svc.CreateCommentReq.prototype.clearComment = function() {
+  return this.setComment(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.pb.svc.CreateCommentReq.prototype.hasComment = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -1327,7 +1430,7 @@ proto.pb.svc.UpdatePostReq.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.svc.UpdatePostReq.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    post: (f = msg.getPost()) && pb_unit_post_post_pb.Post.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1364,6 +1467,11 @@ proto.pb.svc.UpdatePostReq.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new pb_unit_post_post_pb.Post;
+      reader.readMessage(value,pb_unit_post_post_pb.Post.deserializeBinaryFromReader);
+      msg.setPost(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1393,6 +1501,51 @@ proto.pb.svc.UpdatePostReq.prototype.serializeBinary = function() {
  */
 proto.pb.svc.UpdatePostReq.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getPost();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      pb_unit_post_post_pb.Post.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional pb.unit.post.Post Post = 1;
+ * @return {?proto.pb.unit.post.Post}
+ */
+proto.pb.svc.UpdatePostReq.prototype.getPost = function() {
+  return /** @type{?proto.pb.unit.post.Post} */ (
+    jspb.Message.getWrapperField(this, pb_unit_post_post_pb.Post, 1));
+};
+
+
+/**
+ * @param {?proto.pb.unit.post.Post|undefined} value
+ * @return {!proto.pb.svc.UpdatePostReq} returns this
+*/
+proto.pb.svc.UpdatePostReq.prototype.setPost = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.pb.svc.UpdatePostReq} returns this
+ */
+proto.pb.svc.UpdatePostReq.prototype.clearPost = function() {
+  return this.setPost(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.pb.svc.UpdatePostReq.prototype.hasPost = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
