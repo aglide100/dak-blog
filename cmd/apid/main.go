@@ -61,7 +61,7 @@ func realMain() error {
 
 	postSrv := controllers.NewPostServiceController()
 	accountSrv := controllers.NewAccountServiceController()
-	commentSrv := controllers.NewAccountServiceController()
+	commentSrv := controllers.NewCommentServiceController()
 	grpcServer := grpc.NewServer(opts...)
 	
 	pb_svc.RegisterPostServer(grpcServer, postSrv)
