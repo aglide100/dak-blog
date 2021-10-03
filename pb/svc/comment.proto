@@ -3,6 +3,25 @@ syntax = "proto3";
 package pb.svc;
 option go_package = "pb/svc";
 
+import "pb/unit/comment/comment.proto";
+
 service Comment {
-   
+    rpc CreateComment(CreateCommentReq) returns (CreateCommentRes);
+    rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentRes);
+}
+
+message CreateCommentReq {
+    unit.comment.Comment Comment = 1;
+}
+
+message CreateCommentRes {
+    // pass
+}
+
+message DeleteCommentReq {
+    unit.comment.Comment id = 1;
+}
+
+message DeleteCommentRes {
+    // pass
 }

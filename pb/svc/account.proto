@@ -12,25 +12,25 @@ service Account {
 }
 
 message CreateAccountReq {
-    unit.account.Account account_id = 1;
+    unit.account.Account id = 1;
 }
 
 message CreateAccountRes {
-
+// pass
 }
 
 message DeleteAccountReq {
-
+    unit.account.Account id = 1;
 }
 
 message DeleteAccountRes {
-
+// pass
 }
 
 message GetAccountReq {
-
+    unit.account.Account id = 1;
 }
 
 message GetAccountRes {
-    
+    unit.account.Account Account = 1;
 }

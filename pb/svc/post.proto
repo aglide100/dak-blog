@@ -4,12 +4,12 @@ package pb.svc;
 option go_package = "pb/svc";
 
 import "pb/unit/post/post.proto";
+// import "pb/unit/comment/comment.proto";
 
 service Post {
     rpc CreatePost(CreatePostReq) returns (CreatePostRes);
     rpc DeletePost(DeletePostReq) returns (DeletePostRes); 
     rpc GetPost(GetPostReq) returns (GetPostRes);
-    rpc CreateComment(CreateCommentReq) returns (CreateCommentRes);
     rpc UpdatePost(UpdatePostReq) returns (UpdatePostRes);
 }
 
@@ -26,7 +26,7 @@ message DeletePostReq{
 }
 
 message DeletePostRes{
-
+// pass
 }
 
 message GetPostReq {
@@ -37,18 +37,19 @@ message GetPostRes {
     unit.post.Post Post = 1;
 }
 
-message CreateCommentReq {
-
+message GetCommentReq {
+    unit.post.Post id = 1;
 }
 
-message CreateCommentRes {
-
+message GetCommentRes {
+    unit.post.Post Comments = 1;
 }
+
 
 message UpdatePostReq {
-
+    unit.post.Post Post = 1;
 }
 
 message UpdatePostRes {
-
+// pass
 }

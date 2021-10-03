@@ -37,15 +37,6 @@ Post.GetPost = {
   responseType: pb_svc_post_pb.GetPostRes
 };
 
-Post.CreateComment = {
-  methodName: "CreateComment",
-  service: Post,
-  requestStream: false,
-  responseStream: false,
-  requestType: pb_svc_post_pb.CreateCommentReq,
-  responseType: pb_svc_post_pb.CreateCommentRes
-};
-
 Post.UpdatePost = {
   methodName: "UpdatePost",
   service: Post,
@@ -129,37 +120,6 @@ PostClient.prototype.getPost = function getPost(requestMessage, metadata, callba
     callback = arguments[1];
   }
   var client = grpc.unary(Post.GetPost, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
-PostClient.prototype.createComment = function createComment(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(Post.CreateComment, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

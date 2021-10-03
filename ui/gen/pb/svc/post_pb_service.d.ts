@@ -31,15 +31,6 @@ type PostGetPost = {
   readonly responseType: typeof pb_svc_post_pb.GetPostRes;
 };
 
-type PostCreateComment = {
-  readonly methodName: string;
-  readonly service: typeof Post;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof pb_svc_post_pb.CreateCommentReq;
-  readonly responseType: typeof pb_svc_post_pb.CreateCommentRes;
-};
-
 type PostUpdatePost = {
   readonly methodName: string;
   readonly service: typeof Post;
@@ -54,7 +45,6 @@ export class Post {
   static readonly CreatePost: PostCreatePost;
   static readonly DeletePost: PostDeletePost;
   static readonly GetPost: PostGetPost;
-  static readonly CreateComment: PostCreateComment;
   static readonly UpdatePost: PostUpdatePost;
 }
 
@@ -116,15 +106,6 @@ export class PostClient {
   getPost(
     requestMessage: pb_svc_post_pb.GetPostReq,
     callback: (error: ServiceError|null, responseMessage: pb_svc_post_pb.GetPostRes|null) => void
-  ): UnaryResponse;
-  createComment(
-    requestMessage: pb_svc_post_pb.CreateCommentReq,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: pb_svc_post_pb.CreateCommentRes|null) => void
-  ): UnaryResponse;
-  createComment(
-    requestMessage: pb_svc_post_pb.CreateCommentReq,
-    callback: (error: ServiceError|null, responseMessage: pb_svc_post_pb.CreateCommentRes|null) => void
   ): UnaryResponse;
   updatePost(
     requestMessage: pb_svc_post_pb.UpdatePostReq,

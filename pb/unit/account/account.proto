@@ -15,4 +15,5 @@ message ID {
 message Spec {
     string account_name = 1;
     string email = 2;
+    string token = 3;
 }

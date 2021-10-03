@@ -49,6 +49,10 @@ func (db *Database) UpdatePost() error {
 	return nil
 }
 
+func (db *Database) DeletePost() error {
+	return nil
+}
+
 func (db *Database) SearchPosts(keyword string) ([]*pb_unit_post.Post, error) {
 	const q = `
 	
@@ -98,3 +102,4 @@ func (db *Database) SearchPosts(keyword string) ([]*pb_unit_post.Post, error) {
 
 	return allPosts, nil
 }
+

@@ -130,39 +130,56 @@ export namespace GetPostRes {
   }
 }
 
-export class CreateCommentReq extends jspb.Message {
+export class GetCommentReq extends jspb.Message {
+  hasId(): boolean;
+  clearId(): void;
+  getId(): pb_unit_post_post_pb.Post | undefined;
+  setId(value?: pb_unit_post_post_pb.Post): void;
+
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CreateCommentReq.AsObject;
-  static toObject(includeInstance: boolean, msg: CreateCommentReq): CreateCommentReq.AsObject;
+  toObject(includeInstance?: boolean): GetCommentReq.AsObject;
+  static toObject(includeInstance: boolean, msg: GetCommentReq): GetCommentReq.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: CreateCommentReq, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CreateCommentReq;
-  static deserializeBinaryFromReader(message: CreateCommentReq, reader: jspb.BinaryReader): CreateCommentReq;
+  static serializeBinaryToWriter(message: GetCommentReq, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetCommentReq;
+  static deserializeBinaryFromReader(message: GetCommentReq, reader: jspb.BinaryReader): GetCommentReq;
 }
 
-export namespace CreateCommentReq {
+export namespace GetCommentReq {
   export type AsObject = {
+    id?: pb_unit_post_post_pb.Post.AsObject,
   }
 }
 
-export class CreateCommentRes extends jspb.Message {
+export class GetCommentRes extends jspb.Message {
+  hasComments(): boolean;
+  clearComments(): void;
+  getComments(): pb_unit_post_post_pb.Post | undefined;
+  setComments(value?: pb_unit_post_post_pb.Post): void;
+
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CreateCommentRes.AsObject;
-  static toObject(includeInstance: boolean, msg: CreateCommentRes): CreateCommentRes.AsObject;
+  toObject(includeInstance?: boolean): GetCommentRes.AsObject;
+  static toObject(includeInstance: boolean, msg: GetCommentRes): GetCommentRes.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: CreateCommentRes, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CreateCommentRes;
-  static deserializeBinaryFromReader(message: CreateCommentRes, reader: jspb.BinaryReader): CreateCommentRes;
+  static serializeBinaryToWriter(message: GetCommentRes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetCommentRes;
+  static deserializeBinaryFromReader(message: GetCommentRes, reader: jspb.BinaryReader): GetCommentRes;
 }
 
-export namespace CreateCommentRes {
+export namespace GetCommentRes {
   export type AsObject = {
+    comments?: pb_unit_post_post_pb.Post.AsObject,
   }
 }
 
 export class UpdatePostReq extends jspb.Message {
+  hasPost(): boolean;
+  clearPost(): void;
+  getPost(): pb_unit_post_post_pb.Post | undefined;
+  setPost(value?: pb_unit_post_post_pb.Post): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdatePostReq.AsObject;
   static toObject(includeInstance: boolean, msg: UpdatePostReq): UpdatePostReq.AsObject;
@@ -175,6 +192,7 @@ export class UpdatePostReq extends jspb.Message {
 
 export namespace UpdatePostReq {
   export type AsObject = {
+    post?: pb_unit_post_post_pb.Post.AsObject,
   }
 }
 

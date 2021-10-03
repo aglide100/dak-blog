@@ -58,6 +58,9 @@ export class Spec extends jspb.Message {
   getEmail(): string;
   setEmail(value: string): void;
 
+  getToken(): string;
+  setToken(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Spec.AsObject;
   static toObject(includeInstance: boolean, msg: Spec): Spec.AsObject;
@@ -72,6 +75,7 @@ export namespace Spec {
   export type AsObject = {
     accountName: string,
     email: string,
+    token: string,
   }
 }
 

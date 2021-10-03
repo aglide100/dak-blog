@@ -5,10 +5,10 @@ import * as jspb from "google-protobuf";
 import * as pb_unit_account_account_pb from "../../pb/unit/account/account_pb";
 
 export class CreateAccountReq extends jspb.Message {
-  hasAccountId(): boolean;
-  clearAccountId(): void;
-  getAccountId(): pb_unit_account_account_pb.Account | undefined;
-  setAccountId(value?: pb_unit_account_account_pb.Account): void;
+  hasId(): boolean;
+  clearId(): void;
+  getId(): pb_unit_account_account_pb.Account | undefined;
+  setId(value?: pb_unit_account_account_pb.Account): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateAccountReq.AsObject;
@@ -22,7 +22,7 @@ export class CreateAccountReq extends jspb.Message {
 
 export namespace CreateAccountReq {
   export type AsObject = {
-    accountId?: pb_unit_account_account_pb.Account.AsObject,
+    id?: pb_unit_account_account_pb.Account.AsObject,
   }
 }
 
@@ -43,6 +43,11 @@ export namespace CreateAccountRes {
 }
 
 export class DeleteAccountReq extends jspb.Message {
+  hasId(): boolean;
+  clearId(): void;
+  getId(): pb_unit_account_account_pb.Account | undefined;
+  setId(value?: pb_unit_account_account_pb.Account): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteAccountReq.AsObject;
   static toObject(includeInstance: boolean, msg: DeleteAccountReq): DeleteAccountReq.AsObject;
@@ -55,6 +60,7 @@ export class DeleteAccountReq extends jspb.Message {
 
 export namespace DeleteAccountReq {
   export type AsObject = {
+    id?: pb_unit_account_account_pb.Account.AsObject,
   }
 }
 
@@ -75,6 +81,11 @@ export namespace DeleteAccountRes {
 }
 
 export class GetAccountReq extends jspb.Message {
+  hasId(): boolean;
+  clearId(): void;
+  getId(): pb_unit_account_account_pb.Account | undefined;
+  setId(value?: pb_unit_account_account_pb.Account): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetAccountReq.AsObject;
   static toObject(includeInstance: boolean, msg: GetAccountReq): GetAccountReq.AsObject;
@@ -87,10 +98,16 @@ export class GetAccountReq extends jspb.Message {
 
 export namespace GetAccountReq {
   export type AsObject = {
+    id?: pb_unit_account_account_pb.Account.AsObject,
   }
 }
 
 export class GetAccountRes extends jspb.Message {
+  hasAccount(): boolean;
+  clearAccount(): void;
+  getAccount(): pb_unit_account_account_pb.Account | undefined;
+  setAccount(value?: pb_unit_account_account_pb.Account): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetAccountRes.AsObject;
   static toObject(includeInstance: boolean, msg: GetAccountRes): GetAccountRes.AsObject;
@@ -103,6 +120,7 @@ export class GetAccountRes extends jspb.Message {
 
 export namespace GetAccountRes {
   export type AsObject = {
+    account?: pb_unit_account_account_pb.Account.AsObject,
   }
 }
 
