@@ -6,9 +6,11 @@ COPY package*.json ./
 
 COPY . . 
 
+RUN npm install expo-cli -g
+
 RUN npm install --no-optional
 
-RUN npm run build
+RUN npm run build -prod
 
 EXPOSE 3000
 

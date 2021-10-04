@@ -50,7 +50,7 @@ services:
         source: ./keys
         target: /var/lib/apid/keys
     ports:
-      - 8089:8089
+      - 10112:10112
     hostname: go-server
     networks:
       - docker_network
