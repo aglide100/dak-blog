@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Use Go ${{ matrix.go-version }}
-        uses: cedrickring/golang-action${{ matrix.go-version}}@1.6.0
+        uses: cedrickring/golang-action${{ matrix.go-version }}@1.6.0
 
   node_storybook_ci:
     runs-on: ubuntu-latest
