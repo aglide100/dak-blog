@@ -10,6 +10,8 @@ RUN mkdir -p /var/lib/apid/
 # COPY go.mod .
 # COPY go.sum .
 
+RUN ./protogen.sh
+
 RUN go mod vendor \
     && go get -u -d -v ./...
 # RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags '-s' /opt/bin/apid/apid ./cmd/apid

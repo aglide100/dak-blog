@@ -1,0 +1,51 @@
+name: "Deploy product"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          npm install
+          npm run build-storybook
+        working-directory: ui/
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          token: ${{ secrets.TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: ui/storybook-static/ # The folder the action should deploy.
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: ssh scp ssh pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
+        with:
+          host: ${{ secrets.DC_HOST }}
+          user: ${{ secrets.DC_USER }}
+          #pass: ${{ secrets.DC_PASS }}
+          port: ${{ secrets.DC_PORT }}
+          key: ${{ secrets.DC_KEY }}
+          connect_timeout: 10s
+          first_ssh: |
+            pwd
+          scp: |
+            './*' => ${{ secrets.PATH }}
+          last_ssh: |
+            cd ${{ secrets.PATH }}
+            ./deploy.sh

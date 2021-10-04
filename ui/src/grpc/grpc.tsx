@@ -3,7 +3,7 @@ import * as pb_unit_post from "../../gen/pb/unit/post/post_pb";
 import * as pb_svc_post from "../../gen/pb/svc/post_pb";
 import { grpc } from "@improbable-eng/grpc-web";
 
-const grpcHost = "https://like-a-junk.com:8089";
+const grpcHost = "https://dak-blog.live:10112";
 
 export function makeGetPostReq(postId: string) {
   const getPostReq = new pb_svc_post.GetPostReq();
