@@ -10,7 +10,7 @@ github.com/golang/protobuf/ptypes/timestamp
 github.com/improbable-eng/grpc-web/go/grpcweb
 # github.com/klauspost/compress v1.11.7
 github.com/klauspost/compress/flate
-# github.com/lib/pq v1.10.2
+# github.com/lib/pq v1.10.3
 github.com/lib/pq
 github.com/lib/pq/oid
 github.com/lib/pq/scram
