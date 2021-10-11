@@ -1,22 +1,24 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"os"
-	"sync"
 	"strconv"
+	"sync"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
 	pb_svc "github.com/aglide100/dak-blog/pb/svc"
-	"github.com/aglide100/dak-blog/pkg/svc/controllers"
 	"github.com/aglide100/dak-blog/pkg/db"
+	"github.com/aglide100/dak-blog/pkg/svc/controllers"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
+	"golang.org/x/sync/errgroup"
 )
 
 var (
@@ -79,7 +81,10 @@ func realMain() error {
 	pb_svc.RegisterAccountServer(grpcServer, accountSrv)
 	pb_svc.RegisterCommentServer(grpcServer, commentSrv)
 
-	go func() error {
+	wg, ctx := errgroup.WithContext(context.Background())
+	_ = ctx
+
+	wg.Go(func() error {
 		wrappedServer := grpcweb.WrapServer(grpcServer, grpcweb.WithOriginFunc(func(origin string) bool {
 			// for test, TODO fix here
 			return true
@@ -105,10 +110,9 @@ func realMain() error {
 		} 
 
 		return err
-	} ()
-
-	wait.Wait()
+	})
 	
-	return nil
+	
+	return wg.Wait()
 }
 

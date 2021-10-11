@@ -25,19 +25,19 @@ func ConnectDB(host string, port int, user string, password string, dbname strin
 }
 
 func (db *Database) GetPost() (*pb_unit_post.Post, error) {
-	const q = `
-SELECT
-	ID,
-	Title,
-	Author,
-	WrittenDate,
-	Content,
-	PictureURLs,
-	Thumbnail
-FROM
-	post
-ORDER BY ID ASC
-	`
+// 	const q = `
+// SELECT
+// 	ID,
+// 	Title,
+// 	Author,
+// 	WrittenDate,
+// 	Content,
+// 	PictureURLs,
+// 	Thumbnail
+// FROM
+// 	post
+// ORDER BY ID ASC
+// 	`
 
 	
 
