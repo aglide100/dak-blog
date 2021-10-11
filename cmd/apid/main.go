@@ -8,12 +8,14 @@ import (
 	"net/http"
 	"os"
 	"sync"
+	"strconv"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
 	pb_svc "github.com/aglide100/dak-blog/pb/svc"
 	"github.com/aglide100/dak-blog/pkg/svc/controllers"
+	"github.com/aglide100/dak-blog/pkg/db"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 )
 
@@ -59,7 +61,16 @@ func realMain() error {
 		opts = append(opts, grpc.Creds(creds))
 	}
 
-	postSrv := controllers.NewPostServiceController()
+	dbport, err := strconv.Atoi(dbPort)
+	if err != nil {
+		return fmt.Errorf("Can't read dbPort!: %v %v", dbPort, err)
+	}
+	myDB, err := db.ConnectDB(dbAddr, dbport, dbUser, dbPasswd, dbName)
+	if err != nil {
+		return fmt.Errorf("Can't connect DB: %v", err)
+	}
+
+	postSrv := controllers.NewPostServiceController(myDB)
 	accountSrv := controllers.NewAccountServiceController()
 	commentSrv := controllers.NewCommentServiceController()
 	grpcServer := grpc.NewServer(opts...)

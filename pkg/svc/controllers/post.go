@@ -7,14 +7,16 @@ import (
 
 	pb_svc "github.com/aglide100/dak-blog/pb/svc"
 	pb_unit_post "github.com/aglide100/dak-blog/pb/unit/post"
+	"github.com/aglide100/dak-blog/pkg/db"
 )
 
 type PostServer struct {
+	db *db.Database
 	pb_svc.PostServer
 }
 
-func NewPostServiceController() *PostServer {
-	return &PostServer{}
+func NewPostServiceController(db *db.Database) *PostServer {
+	return &PostServer{db: db}
 }
 
 func (s *PostServer) GetPost(ctx context.Context, in *pb_svc.GetPostReq) (*pb_svc.GetPostRes, error) {
