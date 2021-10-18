@@ -1,6 +1,6 @@
 module github.com/aglide100/dak-blog
 
-go 1.13
+go 1.14
 
 require (
 	github.com/improbable-eng/grpc-web v0.14.1

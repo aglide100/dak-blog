@@ -10,8 +10,8 @@ jobs:
   go_ci:
     strategy:
       matrix:
-        go-version: [1.15.x, 1.13x]
-        os: [macos-latest, ubuntu-latest]
+        go-version: [1.15.x, 1.14x]
+        os: [macos-latest, linux-latest]
     name: lint
     runs-on: ${{ matrix.os }}
     steps:
