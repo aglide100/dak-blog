@@ -10,7 +10,9 @@ RUN mkdir -p /var/lib/apid/
 # COPY go.mod .
 # COPY go.sum .
 
-RUN ./protogen.sh
+#RUN apt update && apt install -y protobuf-compiler
+
+#RUN bash -c  "./protogen.sh"
 
 RUN go mod vendor \
     && go get -u -d -v ./...
