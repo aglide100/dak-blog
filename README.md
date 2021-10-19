@@ -4,23 +4,24 @@
 
 ## 1. purpose
 
-writing some code or project at own blog
+made own blog with typescript and golang
+
+
 
 ## 2. How to run?
 
-> ### docker-compose build
+> ### Using docker
 
     docker-compose build
 
     docker-compose up -d
 
-    OR
-
-    . dc.sh
 
 OR
 
-Just run web only
+just command
+
+running webapp
 
 Move the ui directory and
 
@@ -37,8 +38,21 @@ Move the ui directory and
 > ### run npm build
 
     npm run build
+ 
+ running api server
+ 
+> ### go run
+    go run cmd/**/*.go
+    
+    
 
-## 3. Dependency
+## 3. Project Diagram
+
+wip
+
+github => github action CI/CD => dockerized app => deploy server
+
+## 4. Dependency
 
 This project used
 
@@ -64,6 +78,10 @@ API Server
 
 > [golang][golanglink]
 
+gRPC-web
+
+> [gprc-web][grpcweblink]
+
 UI develop testing tool
 
 > [stoybook][storybooklink]
@@ -82,7 +100,7 @@ Container
 
 ---
 
-## 4. preview
+## 5. preview
 
 storybook
 
@@ -102,3 +120,4 @@ vercel app
 [postgesqllink]: https://www.postgresql.org/
 [dockerlink]: https://www.docker.com/
 [nginxlink]: https://www.nginx.com/
+[grpcweblink]: https://github.com/improbable-eng/grpc-web
