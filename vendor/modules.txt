@@ -1,3 +1,5 @@
+# github.com/cenkalti/backoff/v4 v4.1.1
+github.com/cenkalti/backoff/v4
 # github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f
 github.com/desertbit/timer
 # github.com/golang/protobuf v1.5.0
@@ -6,7 +8,7 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-# github.com/improbable-eng/grpc-web v0.14.1
+# github.com/improbable-eng/grpc-web v0.15.0
 github.com/improbable-eng/grpc-web/go/grpcweb
 # github.com/klauspost/compress v1.11.7
 github.com/klauspost/compress/flate
@@ -16,7 +18,7 @@ github.com/lib/pq/oid
 github.com/lib/pq/scram
 # github.com/rs/cors v1.7.0
 github.com/rs/cors
-# golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4
+# golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack
@@ -25,10 +27,10 @@ golang.org/x/net/internal/timeseries
 golang.org/x/net/trace
 # golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.0.0-20210510120138-977fb7262007
+# golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
-# golang.org/x/text v0.3.5
+# golang.org/x/text v0.3.6
 golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
@@ -50,6 +52,7 @@ google.golang.org/grpc/credentials
 google.golang.org/grpc/encoding
 google.golang.org/grpc/encoding/proto
 google.golang.org/grpc/grpclog
+google.golang.org/grpc/health/grpc_health_v1
 google.golang.org/grpc/internal
 google.golang.org/grpc/internal/backoff
 google.golang.org/grpc/internal/balancerload
