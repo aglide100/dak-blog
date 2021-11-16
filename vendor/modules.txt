@@ -35,7 +35,7 @@ golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
 # google.golang.org/genproto v0.0.0-20210126160654-44e461bb6506
 google.golang.org/genproto/googleapis/rpc/status
-# google.golang.org/grpc v1.41.0
+# google.golang.org/grpc v1.42.0
 google.golang.org/grpc
 google.golang.org/grpc/attributes
 google.golang.org/grpc/backoff
