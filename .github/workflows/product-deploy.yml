@@ -124,27 +124,27 @@ jobs:
         run: |
           docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
 
-  deploy_server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v1
-      - name: ssh scp ssh pipelines
-        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-        env:
-          WELCOME: "ssh scp ssh pipelines"
-          LASTSSH: "Doing something after copying"
-        with:
-          host: ${{ secrets.DC_HOST }}
-          user: ${{ secrets.DC_USER }}
-          #pass: ${{ secrets.DC_PASS }}
-          port: ${{ secrets.DC_PORT }}
-          key: ${{ secrets.DC_KEY }}
-          connect_timeout: 10s
-          first_ssh: |
-            pwd
-          scp: |
-            './*' => ${{ secrets.PATH }}
-          last_ssh: |
-            cd ${{ secrets.PATH }}
-            ./deploy.sh
+#  deploy_server:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v1
+#      - name: ssh scp ssh pipelines
+#        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+#        env:
+#          WELCOME: "ssh scp ssh pipelines"
+#          LASTSSH: "Doing something after copying"
+#        with:
+#          host: ${{ secrets.DC_HOST }}
+#          user: ${{ secrets.DC_USER }}
+#          #pass: ${{ secrets.DC_PASS }}
+#          port: ${{ secrets.DC_PORT }}
+#          key: ${{ secrets.DC_KEY }}
+#          connect_timeout: 10s
+#          first_ssh: |
+#            pwd
+#          scp: |
+#            './*' => ${{ secrets.PATH }}
+#          last_ssh: |
+#            cd ${{ secrets.PATH }}
+#            ./deploy.sh
