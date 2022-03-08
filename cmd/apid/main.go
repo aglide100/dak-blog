@@ -67,6 +67,7 @@ func realMain() error {
 	if err != nil {
 		return fmt.Errorf("Can't read dbPort!: %v %v", dbPort, err)
 	}
+	
 	myDB, err := db.ConnectDB(dbAddr, dbport, dbUser, dbPasswd, dbName)
 	if err != nil {
 		return fmt.Errorf("Can't connect DB: %v", err)
