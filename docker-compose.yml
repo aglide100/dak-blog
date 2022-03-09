@@ -39,29 +39,29 @@ services:
       - docker_network
     ports:
       - 443:3000
-  api:
-    container_name: go-server
-    build:
-      context: ./
-    links:
-      - postgres:app_db
-    volumes:
-      - <<: *services-volume
-        source: ./keys
-        target: /var/lib/apid/keys
-    ports:
-      - 10112:10112
-    hostname: go-server
-    networks:
-      - docker_network
-    environment:
-      DB_ADDR: app_db
-      DB_PORT: 5432
-      DB_USER: table_admin
-      DB_PASSWORD: ${USERPWD}
-      DB_NAME: blog
-    depends_on:
-      - postgres
+  # api:
+  #   container_name: go-server
+  #   build:
+  #     context: ./
+  #   links:
+  #     - postgres:app_db
+  #   volumes:
+  #     - <<: *services-volume
+  #       source: ./keys
+  #       target: /var/lib/apid/keys
+  #   ports:
+  #     - 10112:10112
+  #   hostname: go-server
+  #   networks:
+  #     - docker_network
+  #   environment:
+  #     DB_ADDR: app_db
+  #     DB_PORT: 5432
+  #     DB_USER: table_admin
+  #     DB_PASSWORD: ${USERPWD}
+  #     DB_NAME: blog
+  #   depends_on:
+  #     - postgres
   postgres:
     container_name: postgres
     build:
@@ -70,8 +70,8 @@ services:
       - <<: *services-volume
         source: ${HOST}/postgres
         target: /var/lib/postgres
-    expose:
-      - 5432
+    ports:
+      - 5432:5432
     hostname: postgres
     networks:
       - docker_network
