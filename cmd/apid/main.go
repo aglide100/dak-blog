@@ -19,24 +19,32 @@ import (
 	"github.com/aglide100/dak-blog/pkg/svc/controllers"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"golang.org/x/sync/errgroup"
+	"github.com/joho/godotenv"
 )
 
-var (
-	dbAddr = os.Getenv("DB_ADDR")
-	dbPort = os.Getenv("DB_PORT")
-	dbUser = os.Getenv("DB_USER")
-	dbPasswd = os.Getenv("DB_PASSWORD")
-	dbName = os.Getenv("DB_NAME")
-)
+
 
 func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Printf("Can't load .env file!: %s", err)
+	}
+
 	if err := realMain(); err != nil {
-		log.Fatal(err)
+		log.Printf("err: %s", err)
+		// log.Fatal(err)
 		os.Exit(1)
 	}
 }
 
-func realMain() error {	
+
+func realMain() error {
+	dbAddr := os.Getenv("DB_ADDR")
+	dbPort := os.Getenv("DB_PORT")
+	dbUser := os.Getenv("DB_USER")
+	dbPasswd := os.Getenv("DB_PASSWORD")
+	dbName := os.Getenv("DB_NAME")
+	
 	gRPCWebAddr := flag.String("grpc.addr", "0.0.0.0:10112", "grpc address")
 	usingTls := flag.Bool("grpc.tls", true, "using http2")
 	serverCrt := flag.String("cert.crt", "keys/server.crt", "crt file location")
