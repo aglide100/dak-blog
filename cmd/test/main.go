@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"github.com/aglide100/dak-blog/pkg/crawler"
-	"github.com/aglide100/dak-blog/pkg/models"
+	// "github.com/aglide100/dak-blog/pkg/models"
 )
 
 func main() {

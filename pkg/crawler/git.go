@@ -31,14 +31,13 @@ func SearchNode(url string) ([]*models.Node, error) {
 	jsonData := gjson.Get(`{ "datas": ` + string(data) + "}", "datas")
 
 	var parseNodes []*models.Node
-	var child []*models.Node
 	var insideError error
 
 	insideError = nil
 	newNode := &models.Node{}
 	jsonData.ForEach(func(key, value gjson.Result) bool {
 		if ( gjson.Get(value.String(), "type").String() == "dir") {
-			child = nil
+			
 			child, err := SearchNode(url + "/" + gjson.Get(value.String(), "name").String())
 			if err != nil {
 				insideError = err
@@ -127,7 +126,7 @@ func PrintGraph(graph *models.Graph, deps int) {
 			str += " "
 		}
 		
-		if idx == len(graph.Nodes) {
+		if idx == (len(graph.Nodes)-1) {
 			log.Printf(str + "└──" + graph.Nodes[idx].File.Name)
 		} else {
 			log.Printf(str + "├──" + graph.Nodes[idx].File.Name)
