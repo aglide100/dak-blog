@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/improbable-eng/grpc-web v0.15.0
-	github.com/joho/godotenv v1.4.0 // indirect
+	github.com/joho/godotenv v1.4.0
 	github.com/lib/pq v1.10.4
 	github.com/tidwall/gjson v1.14.0
 	golang.org/x/net v0.0.0-20210916014120-12bc252f5db8 // indirect

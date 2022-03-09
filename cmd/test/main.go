@@ -13,5 +13,5 @@ func main() {
 		log.Printf("Can't fetch from git! %v", err)
 	}
 
-	log.Printf("result %s", result)
+	log.Printf("result %T", result)
 }
