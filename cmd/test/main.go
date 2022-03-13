@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
+
 	"github.com/aglide100/dak-blog/pkg/crawler"
-	// "github.com/aglide100/dak-blog/pkg/models"
+	"github.com/aglide100/dak-blog/pkg/db"
 )
+
 
 func main() {
 
@@ -12,6 +14,16 @@ func main() {
 	if err != nil {
 		log.Printf("Can't fetch from git! %v", err)
 	}
+	
+	myDB, err := db.ConnectDB("localhost", 5432, "table_admin", "HeLLo!1", "blog")
+	if err != nil {
+		log.Printf("Can't connect database")
+	}
 
-	log.Printf("result %T", result)
+	err = myDB.WriteGitFileFromArray(result.Nodes)
+
+	if err != nil {
+		log.Printf("found err! :%v", err)
+	}
+
 }

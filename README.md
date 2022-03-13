@@ -6,8 +6,6 @@
 
 made own blog with typescript and golang
 
-
-
 ## 2. How to run?
 
 > ### Using docker
@@ -15,7 +13,6 @@ made own blog with typescript and golang
     docker-compose build
 
     docker-compose up -d
-
 
 OR
 
@@ -38,13 +35,12 @@ Move the ui directory and
 > ### run npm build
 
     npm run build
- 
- running api server
- 
+
+running api server
+
 > ### go run
+
     go run cmd/**/*.go
-    
-    
 
 ## 3. Project Diagram
 
@@ -77,6 +73,10 @@ Script language
 API Server
 
 > [golang][golanglink]
+
+Golang validator
+
+> [goValidator][govalidator]
 
 gRPC-web
 
@@ -121,3 +121,4 @@ vercel app
 [dockerlink]: https://www.docker.com/
 [nginxlink]: https://www.nginx.com/
 [grpcweblink]: https://github.com/improbable-eng/grpc-web
+[govalidator]: https://github.com/go-playground/validator

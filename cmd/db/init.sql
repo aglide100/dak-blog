@@ -38,131 +38,92 @@ Database: PostgreSQL 12
 -- Create tables section -------------------------------------------------
 
 -- Table Post
-
-CREATE TABLE "Post"
+create table if not exists "Post"
 (
-  "post_id" UUID NOT NULL,
-  "title" Text,
-  "written_date" Date,
-  "modify_date" Date,
-  "content" Text,
-  "thumnail" Text,
-  "view_count" Serial,
-  "account_id" UUID
+    post_id      uuid not null
+        constraint "PK_Post"
+            primary key
+        constraint post_id
+            unique,
+    title        text,
+    written_date date,
+    modify_date  date,
+    content      text,
+    thumnail     text,
+    view_count   serial,
+    account_id   uuid
 )
-WITH (
-  autovacuum_enabled=true)
-;
+    with (autovacuum_enabled = true);
 
-CREATE INDEX "IX_Relationship4" ON "Post" ("account_id")
-;
+alter table "Post"
+    owner to table_admin;
 
-ALTER TABLE "Post" ADD CONSTRAINT "PK_Post" PRIMARY KEY ("post_id")
-;
+create index if not exists "IX_Relationship4"
+    on "Post" (account_id);
 
-ALTER TABLE "Post" ADD CONSTRAINT "post_id" UNIQUE ("post_id")
-;
-
--- Table Comment
-
-CREATE TABLE "Comment"
+create table if not exists "Comment"
 (
-  "comment_id" UUID NOT NULL,
-  "written_date" Date,
-  "modify_date" Date,
-  "content" Text,
-  "account_id" UUID,
-  "post_id" UUID
+    comment_id   uuid not null
+        constraint "PK_Comment"
+            primary key
+        constraint comment_id
+            unique,
+    written_date date,
+    modify_date  date,
+    content      text,
+    account_id   uuid,
+    post_id      uuid
 )
-WITH (
-  autovacuum_enabled=true)
-;
+    with (autovacuum_enabled = true);
 
-CREATE INDEX "IX_Relationship5" ON "Comment" ("account_id")
-;
+alter table "Comment"
+    owner to table_admin;
 
-CREATE INDEX "IX_Relationship7" ON "Comment" ("post_id")
-;
+create index if not exists "IX_Relationship5"
+    on "Comment" (account_id);
 
-ALTER TABLE "Comment" ADD CONSTRAINT "PK_Comment" PRIMARY KEY ("comment_id")
-;
+create index if not exists "IX_Relationship7"
+    on "Comment" (post_id);
 
-ALTER TABLE "Comment" ADD CONSTRAINT "comment_id" UNIQUE ("comment_id")
-;
-
--- Table Account
-
-CREATE TABLE "Account"
+create table if not exists "Account"
 (
-  "nick_name" Text,
-  "token" Text,
-  "email" Text,
-  "joined_date" Date,
-  "account_id" UUID NOT NULL
+    nick_name   text,
+    token       text,
+    email       text,
+    joined_date date,
+    account_id  uuid not null
+        constraint "PK_Account"
+            primary key
+        constraint account_id
+            unique
 )
-WITH (
-  autovacuum_enabled=true)
-;
+    with (autovacuum_enabled = true);
 
-ALTER TABLE "Account" ADD CONSTRAINT "PK_Account" PRIMARY KEY ("account_id")
-;
+alter table "Account"
+    owner to table_admin;
 
-ALTER TABLE "Account" ADD CONSTRAINT "account_id" UNIQUE ("account_id")
-;
-
--- Table Picture_URL
-
-CREATE TABLE "Picture_URL"
+create table if not exists "Picture_URL"
 (
-  "picture_URL" Text,
-  "post_id" UUID
+    "picture_URL" text,
+    post_id       uuid
 )
-WITH (
-  autovacuum_enabled=true)
-;
+    with (autovacuum_enabled = true);
 
-CREATE INDEX "IX_Relationship2" ON "Picture_URL" ("post_id")
-;
+alter table "Picture_URL"
+    owner to table_admin;
 
--- Create foreign keys (relationships) section -------------------------------------------------
+create index if not exists "IX_Relationship2"
+    on "Picture_URL" (post_id);
 
-ALTER TABLE "Post"
-  ADD CONSTRAINT "Relationship1"
-    FOREIGN KEY ()
-    REFERENCES "Picture_URL" ()
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-;
+create table if not exists "GithubFile"
+(
+    "Name"    varchar,
+    "Path"    varchar,
+    "Url"     varchar,
+    "Dir"     boolean,
+    "Content" varchar
+);
 
-ALTER TABLE "Picture_URL"
-  ADD CONSTRAINT "Has array"
-    FOREIGN KEY ("post_id")
-    REFERENCES "Post" ("post_id")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-;
-
-ALTER TABLE "Post"
-  ADD CONSTRAINT "Post(n) to Account(1)"
-    FOREIGN KEY ("account_id")
-    REFERENCES "Account" ("account_id")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-;
-
-ALTER TABLE "Comment"
-  ADD CONSTRAINT "Comment(n) to Account(1)"
-    FOREIGN KEY ("account_id")
-    REFERENCES "Account" ("account_id")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-;
-
-ALTER TABLE "Comment"
-  ADD CONSTRAINT "Comment(n) to Post(1)"
-    FOREIGN KEY ("post_id")
-    REFERENCES "Post" ("post_id")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-;
+alter table "GithubFile"
+    owner to table_admin;
 
