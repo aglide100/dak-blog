@@ -7,10 +7,13 @@ import (
 	"github.com/aglide100/dak-blog/pkg/db"
 )
 
+const gitUrl = "https://api.github.com/repos/aglide100/Today-I-Learned/contents"
+
 
 func main() {
+	myCrawler := crawler.NewGitCrawler("test", gitUrl)
 
-	result, err := crawler.FetchFromGit()
+	result, err := myCrawler.FetchFromGit()
 	if err != nil {
 		log.Printf("Can't fetch from git! %v", err)
 	}

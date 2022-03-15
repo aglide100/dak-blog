@@ -10,26 +10,35 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-const gitUrl = "https://api.github.com/repos/aglide100/Today-I-Learned/contents"
+type GitCrawler struct {
+	AccessToken
+	ScrapUrl
+}
 
-func SearchNode(url string) ([]*models.Node, error) {
-	log.Printf("Start parse url: %s", url)
-	res, err := http.Get(url)
+type AccessToken struct {
+	Token string
+}
+
+type ScrapUrl struct {
+	Url string
+}
+
+func NewGitCrawler(token string, url string) *GitCrawler {
+	return &GitCrawler{
+		AccessToken{Token: token},
+		ScrapUrl{Url: url},
+	}
+}
+
+func (gitCrawler *GitCrawler) SearchNode(url string, parent string) ([]*models.Node, error) {
+	log.Printf("Start parse url: %s / %s", url, parent)
+	
+	data, err := gitCrawler.CreateHttpReq(url)
 	if err != nil {
 		return nil, err
 	}
 
-	defer res.Body.Close()
-	if res.StatusCode != 200 {
-		return nil, errors.New("status code error!")
-	}
-
-	data, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	jsonData := gjson.Get(`{ "datas": ` + string(data) + "}", "datas")
+	jsonData := gjson.Get(`{ "datas": ` + data + "}", "datas")
 
 	var parseNodes []*models.Node
 	var insideError error
@@ -38,7 +47,7 @@ func SearchNode(url string) ([]*models.Node, error) {
 	newNode := &models.Node{}
 	jsonData.ForEach(func(key, value gjson.Result) bool {
 		if ( gjson.Get(value.String(), "type").String() == "dir") {
-			child, err := SearchNode(url + "/" + gjson.Get(value.String(), "name").String())
+			child, err := gitCrawler.SearchNode(url + "/" + gjson.Get(value.String(), "name").String(), gjson.Get(value.String(), "url").String())
 			if err != nil {
 				insideError = err
 				return false
@@ -50,6 +59,7 @@ func SearchNode(url string) ([]*models.Node, error) {
 				// size: gjson.Get(value.String(), "size").Int(),
 				Url: gjson.Get(value.String(), "url").String(),
 				Content: "",
+				Parent: parent,
 				Dir: true,
 			}
 
@@ -59,30 +69,19 @@ func SearchNode(url string) ([]*models.Node, error) {
 			}
 
 		} else {
-			res, err := http.Get(gjson.Get(value.String(), "download_url").String())
+			data, err := gitCrawler.CreateHttpReq(gjson.Get(value.String(), "download_url").String())
 			if err != nil {
 				return false
 			}
 			
-			defer res.Body.Close()
-			if res.StatusCode != 200 {
-				log.Printf("Check status code")
-				return false
-			}
-		
-			data, err := ioutil.ReadAll(res.Body)
-			if err != nil {
-				log.Printf("Can't read data %s", res.Body)
-				return false
-			}
-
 
 			initFile := models.File{
 				Name: gjson.Get(value.String(), "name").String(),
 				Path: gjson.Get(value.String(), "path").String(),
 				Url: gjson.Get(value.String(), "url").String(),
 				Dir: false,
-				Content: string(data),
+				Parent: parent,
+				Content: data,
 			}
 
 			newNode = &models.Node{
@@ -102,10 +101,10 @@ func SearchNode(url string) ([]*models.Node, error) {
 	return parseNodes, nil
 }
 
-func ScrapApi(url string) (*models.Graph, error) {
-	log.Printf("Start scrap url: %s ...", url)
+func (gitCrawler *GitCrawler) FetchFromGit() (*models.Graph, error) {
+	log.Printf("Start scrap url: %s ...", gitCrawler.Url)
 
-	parseNodes, err := SearchNode(url)
+	parseNodes, err := gitCrawler.SearchNode(gitCrawler.Url, "")
 	if err != nil {
 		return nil, err
 	}
@@ -113,20 +112,10 @@ func ScrapApi(url string) (*models.Graph, error) {
 		Nodes: parseNodes,
 	}
 
+	// optional
+	PrintGraph(graph, 0)
+
 	return graph, nil
-}
-
-func FetchFromGit() (*models.Graph, error) {
-	log.Printf("start fetch from git....")
-
-	result, err := ScrapApi(gitUrl)
-	if err != nil {
-		return nil, err
-	}
-
-	PrintGraph(result, 0)
-
-	return result, nil
 }
 
 func PrintGraph(graph *models.Graph, deps int) {
@@ -136,12 +125,12 @@ func PrintGraph(graph *models.Graph, deps int) {
 				Nodes: graph.Nodes[idx].Childs,
 			}
 
-			PrintGraph(childGraph, deps+1)
+			PrintGraph(childGraph, deps + 1)
 		}
 		
 		str := "|"
 
-		for i:=0; i<deps; i++ {
+		for i := 0; i < deps; i++ {
 			str += " "
 		}
 		
@@ -151,4 +140,36 @@ func PrintGraph(graph *models.Graph, deps int) {
 			log.Printf(str + "├──" + graph.Nodes[idx].File.Name)
 		}
 	}
+}
+
+func (gitCrawler *GitCrawler) CreateHttpReq(url string) (string, error) {
+	log.Printf("Start parse url: %s", url)
+	
+	req, err := http.NewRequest("GET", url, nil) 
+	if err != nil {
+		return "", err
+	}
+
+	if len(gitCrawler.Token) > 1 {
+		log.Printf("Get gitCrawler.Token!")
+		req.Header.Add("Authorization", gitCrawler.Token)
+	}
+
+	client := &http.Client{}
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		return "", errors.New("status code error!")
+	}
+
+	data, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+
+	return string(data), nil
 }

@@ -8,4 +8,5 @@ type File struct {
 	Url     string
 	Dir     bool
 	Content string
+	Parent  string
 }
