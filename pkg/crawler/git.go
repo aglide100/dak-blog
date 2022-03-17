@@ -31,7 +31,7 @@ func NewGitCrawler(token string, url string) *GitCrawler {
 }
 
 func (gitCrawler *GitCrawler) SearchNode(url string, parent string) ([]*models.Node, error) {
-	log.Printf("Start parse url: %s / %s", url, parent)
+	log.Printf("Start parse url: %s / parent:  %s", url, parent)
 	
 	data, err := gitCrawler.CreateHttpReq(url)
 	if err != nil {
@@ -42,12 +42,14 @@ func (gitCrawler *GitCrawler) SearchNode(url string, parent string) ([]*models.N
 
 	var parseNodes []*models.Node
 	var insideError error
-
+	var newNode *models.Node
+	newNode =nil
 	insideError = nil
-	newNode := &models.Node{}
+	// newNode := &models.Node{}
 	jsonData.ForEach(func(key, value gjson.Result) bool {
+		newNode = nil
 		if ( gjson.Get(value.String(), "type").String() == "dir") {
-			child, err := gitCrawler.SearchNode(url + "/" + gjson.Get(value.String(), "name").String(), gjson.Get(value.String(), "url").String())
+			child, err := gitCrawler.SearchNode(url + "/" + gjson.Get(value.String(), "name").String(), gjson.Get(value.String(), "html_url").String())
 			if err != nil {
 				insideError = err
 				return false
@@ -56,13 +58,13 @@ func (gitCrawler *GitCrawler) SearchNode(url string, parent string) ([]*models.N
 			initFile := models.File{
 				Name: gjson.Get(value.String(), "name").String(),
 				Path: gjson.Get(value.String(), "path").String(),
-				// size: gjson.Get(value.String(), "size").Int(),
-				Url: gjson.Get(value.String(), "url").String(),
+				Url: gjson.Get(value.String(), "html_url").String(),
 				Content: "",
 				Parent: parent,
 				Dir: true,
 			}
 
+			
 			newNode = &models.Node{
 				File: initFile,
 				Childs: child,
@@ -73,12 +75,11 @@ func (gitCrawler *GitCrawler) SearchNode(url string, parent string) ([]*models.N
 			if err != nil {
 				return false
 			}
-			
 
 			initFile := models.File{
 				Name: gjson.Get(value.String(), "name").String(),
 				Path: gjson.Get(value.String(), "path").String(),
-				Url: gjson.Get(value.String(), "url").String(),
+				Url: gjson.Get(value.String(), "html_url").String(),
 				Dir: false,
 				Parent: parent,
 				Content: data,
@@ -91,6 +92,7 @@ func (gitCrawler *GitCrawler) SearchNode(url string, parent string) ([]*models.N
 		}
 
 		parseNodes = append(parseNodes, newNode)
+		// log.Printf("add newNode :%v", newNode)
 		return true
 	})
 
@@ -143,17 +145,25 @@ func PrintGraph(graph *models.Graph, deps int) {
 }
 
 func (gitCrawler *GitCrawler) CreateHttpReq(url string) (string, error) {
-	log.Printf("Start parse url: %s", url)
+	log.Printf("Create http req: %s", url)
 	
 	req, err := http.NewRequest("GET", url, nil) 
 	if err != nil {
 		return "", err
 	}
 
-	if len(gitCrawler.Token) > 1 {
-		log.Printf("Get gitCrawler.Token!")
-		req.Header.Add("Authorization", gitCrawler.Token)
+	if len(gitCrawler.AccessToken.Token) > 1 {
+		// log.Printf("token : %s",gitCrawler.AccessToken.Token)
+		req.Header.Set("user-agent", "golang application")
+		req.Header.Add("Authorization", "token "+gitCrawler.AccessToken.Token)
 	}
+
+	// print header
+	// if reqHeadersBytes, err := json.Marshal(req.Header); err != nil {
+	// 	log.Println("Could not Marshal Req Headers")
+	// } else {
+	// 	log.Println(string(reqHeadersBytes))
+	// }
 
 	client := &http.Client{}
 	res, err := client.Do(req)
@@ -163,7 +173,7 @@ func (gitCrawler *GitCrawler) CreateHttpReq(url string) (string, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode != 200 {
-		return "", errors.New("status code error!")
+		return "", HandleHttpStatusErr(res)
 	}
 
 	data, err := ioutil.ReadAll(res.Body)
@@ -172,4 +182,13 @@ func (gitCrawler *GitCrawler) CreateHttpReq(url string) (string, error) {
 	}
 
 	return string(data), nil
+}
+
+func HandleHttpStatusErr(res *http.Response) (error) {
+	data, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return  err
+	}
+
+	return errors.New("status code error! "+ string(data) )
 }

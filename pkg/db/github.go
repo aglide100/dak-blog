@@ -7,12 +7,13 @@ import (
 func (db *Database) WriteGitFileFromArray(files []*models.Node) error {
 	for i:=0; i < len(files); i++ {
 		var err error
+
 		if files[i].Childs != nil {
 			err = db.WriteGitFileFromArray(files[i].Childs)
-		} else {
-			err = db.WriteGitFile(&files[i].File)
 		}
 
+		err = db.WriteGitFile(&files[i].File)
+		
 		if err != nil {
 			return err
 		}
@@ -23,14 +24,29 @@ func (db *Database) WriteGitFileFromArray(files []*models.Node) error {
 func (db *Database) WriteGitFile(file *models.File) error {
 	const q = `
 	INSERT INTO "GithubFile" (
-	"Name",
-	"Path",
-	"Url",
-	"Dir",
-	"Parent",
-	"Content") 
-	VALUES ($1, $2, $3, $4, $5, $6)
+		"Name",
+		"Path",
+		"Url", 
+		"Dir",
+		"Parent",
+		"Content")
+		VALUES ($1, $2, $3, $4, $5, $6)
+		ON CONFLICT ("Url")
+	DO UPDATE
+		SET ("Name",
+			 "Path",
+			 "Url",
+			 "Dir",
+			 "Parent",
+			 "Content") =
+			(excluded."Name",
+			 excluded."Path",
+			 excluded."Url",
+			 excluded."Dir",
+			 excluded."Parent",
+			 excluded."Content")
 	`
+
 	_, err := db.Conn.Exec(q, 
 	file.Name,
 	file.Path,
@@ -51,6 +67,7 @@ func (db *Database) GetAllGitFile() ([]*models.File, error) {
 	const q = `
 	SELECT * FROM GithubFile
 	`
+	
 	var (
 		Name string
 		Path string
@@ -111,7 +128,7 @@ func (db *Database) GetGitFile(url string) (*models.File, error) {
 	return file, nil
 }
 
-func (db *Database) UpdateGitFile(url string) (error) {
+func (db *Database) UpdateGitFile(file *models.File) (error) {
 	const q = `
 	UPDATE GithubFile
 	SET
@@ -120,6 +137,34 @@ func (db *Database) UpdateGitFile(url string) (error) {
 		Dir = $3,
 		Parent = $4,
 		Content = $5,
+	WHERE url = $6
 	`
+	_, err := db.Conn.Exec(q, 
+		file.Name,
+		file.Path,
+		file.Url,
+		file.Dir,
+		file.Parent,
+		file.Content,
+		file.Url)
+
+	if err != nil {
+		return err
+	}
+	
+	return nil
+}
+
+func (db *Database) DeleteGitFile(url string) (error) {
+	const q = `
+	DELETE 
+	FROM GithubFile
+	WHERE url = $1
+	`
+	_, err := db.Conn.Exec(q, url)
+	if err != nil {
+		return err
+	}
+	
 	return nil
 }

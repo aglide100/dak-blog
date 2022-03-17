@@ -8,13 +8,7 @@ import (
 	"github.com/aglide100/dak-blog/pkg/models"
 )
 
-type DB interface {
-	ConnectDB(host string, port int, user, password, dbname string) (*Database, error)
-	SearchPosts(keyword string) ([]*pb_unit_post.Post, error)
-	GetPost(id int64) (*pb_unit_post.Post, error)
-	WritePost(post *pb_unit_post.Post) (error)
-	UpdatePost(post *pb_unit_post.Post, id int64) (error)
-	// github file
+type GitDB interface{
 	WriteGitFile(file *models.File) (error)
 	WriteGitFileFromArray(files []*models.File) (error)
 	GetGitFile(url string) (*models.File)
@@ -22,8 +16,20 @@ type DB interface {
 	UpdateGitFile(file *models.File) (error)
 }
 
+type DB interface {
+	ConnectDB(host string, port int, user, password, dbname string) (*Database, error)
+	SearchPosts(keyword string) ([]*pb_unit_post.Post, error)
+	GetPost(id int64) (*pb_unit_post.Post, error)
+	WritePost(post *pb_unit_post.Post) (error)
+	UpdatePost(post *pb_unit_post.Post, id int64) (error)
+	// github file
+
+	
+}
+
 type Database struct {
 	Conn *sql.DB
+	GitDB
 }
 
 

@@ -1,7 +1,7 @@
 package models
 
 type Node struct {
-	File File
+	File   File
 	Childs []*Node
 }
 

@@ -11,7 +11,7 @@ const gitUrl = "https://api.github.com/repos/aglide100/Today-I-Learned/contents"
 
 
 func main() {
-	myCrawler := crawler.NewGitCrawler("test", gitUrl)
+	myCrawler := crawler.NewGitCrawler("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", gitUrl)
 
 	result, err := myCrawler.FetchFromGit()
 	if err != nil {
