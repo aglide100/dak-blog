@@ -155,7 +155,7 @@ func (gitCrawler *GitCrawler) CreateHttpReq(url string) (string, error) {
 	if len(gitCrawler.AccessToken.Token) > 1 {
 		// log.Printf("token : %s",gitCrawler.AccessToken.Token)
 		req.Header.Set("user-agent", "golang application")
-		req.Header.Add("Authorization", "token "+gitCrawler.AccessToken.Token)
+		req.Header.Add("Authorization", gitCrawler.AccessToken.Token)
 	}
 
 	// print header

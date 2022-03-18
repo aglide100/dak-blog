@@ -21,7 +21,9 @@ message Spec {
     string written_date = 3;
     string content = 4;
     string thumbnail = 5;
-    repeated string pictureURLs = 6;
+    string category = 6;
+    string url = 7;
+    repeated string pictureURLs = 8;
 }
 
 message Comments {

@@ -10,3 +10,12 @@ type File struct {
 	Content string
 	Parent  string
 }
+
+type Node struct {
+	File   File
+	Childs []*Node
+}
+
+type Graph struct {
+	Nodes []*Node
+}

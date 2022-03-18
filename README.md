@@ -78,6 +78,10 @@ Golang validator
 
 > [goValidator][govalidator]
 
+Golang godotenv
+
+> [godotenv][godotenv]
+
 gRPC-web
 
 > [gprc-web][grpcweblink]
@@ -122,3 +126,4 @@ vercel app
 [nginxlink]: https://www.nginx.com/
 [grpcweblink]: https://github.com/improbable-eng/grpc-web
 [govalidator]: https://github.com/go-playground/validator
+[godotenv]: https://github.com/joho/godotenv
