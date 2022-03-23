@@ -39,6 +39,8 @@ func (db *Database) GetPost() (*pb_unit_post.Post, error) {
 // ORDER BY ID ASC
 // 	`
 
+	log.Printf("GetPost")
+
 	
 
 	return nil, nil
