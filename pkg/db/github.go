@@ -6,14 +6,15 @@ import (
 
 func (db *Database) WriteGitFileFromArray(files []*models.Node) error {
 	for i:=0; i < len(files); i++ {
-		var err error
 
 		if files[i].Childs != nil {
-			err = db.WriteGitFileFromArray(files[i].Childs)
+			err := db.WriteGitFileFromArray(files[i].Childs)
+			if err != nil {
+				return err
+			}
 		}
 
-		err = db.WriteGitFile(&files[i].File)
-		
+		err := db.WriteGitFile(&files[i].File)
 		if err != nil {
 			return err
 		}
