@@ -428,7 +428,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.pb.unit.post.Spec.repeatedFields_ = [6];
+proto.pb.unit.post.Spec.repeatedFields_ = [8];
 
 
 
@@ -464,7 +464,9 @@ proto.pb.unit.post.Spec.toObject = function(includeInstance, msg) {
     writtenDate: jspb.Message.getFieldWithDefault(msg, 3, ""),
     content: jspb.Message.getFieldWithDefault(msg, 4, ""),
     thumbnail: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    pictureurlsList: jspb.Message.getRepeatedField(msg, 6)
+    category: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    url: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    pictureurlsList: jspb.Message.getRepeatedField(msg, 8)
   };
 
   if (includeInstance) {
@@ -522,6 +524,14 @@ proto.pb.unit.post.Spec.deserializeBinaryFromReader = function(msg, reader) {
       msg.setThumbnail(value);
       break;
     case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCategory(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUrl(value);
+      break;
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.addPictureurls(value);
       break;
@@ -589,10 +599,24 @@ proto.pb.unit.post.Spec.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getCategory();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = message.getUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
   f = message.getPictureurlsList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      6,
+      8,
       f
     );
   }
@@ -675,17 +699,47 @@ proto.pb.unit.post.Spec.prototype.setThumbnail = function(value) {
 
 
 /**
- * repeated string pictureURLs = 6;
+ * optional string category = 6;
+ * @return {string}
+ */
+proto.pb.unit.post.Spec.prototype.getCategory = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/** @param {string} value */
+proto.pb.unit.post.Spec.prototype.setCategory = function(value) {
+  jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string url = 7;
+ * @return {string}
+ */
+proto.pb.unit.post.Spec.prototype.getUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/** @param {string} value */
+proto.pb.unit.post.Spec.prototype.setUrl = function(value) {
+  jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * repeated string pictureURLs = 8;
  * @return {!Array<string>}
  */
 proto.pb.unit.post.Spec.prototype.getPictureurlsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 6));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 8));
 };
 
 
 /** @param {!Array<string>} value */
 proto.pb.unit.post.Spec.prototype.setPictureurlsList = function(value) {
-  jspb.Message.setField(this, 6, value || []);
+  jspb.Message.setField(this, 8, value || []);
 };
 
 
@@ -694,7 +748,7 @@ proto.pb.unit.post.Spec.prototype.setPictureurlsList = function(value) {
  * @param {number=} opt_index
  */
 proto.pb.unit.post.Spec.prototype.addPictureurls = function(value, opt_index) {
-  jspb.Message.addToRepeatedField(this, 6, value, opt_index);
+  jspb.Message.addToRepeatedField(this, 8, value, opt_index);
 };
 
 

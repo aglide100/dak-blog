@@ -74,6 +74,12 @@ export class Spec extends jspb.Message {
   getThumbnail(): string;
   setThumbnail(value: string): void;
 
+  getCategory(): string;
+  setCategory(value: string): void;
+
+  getUrl(): string;
+  setUrl(value: string): void;
+
   clearPictureurlsList(): void;
   getPictureurlsList(): Array<string>;
   setPictureurlsList(value: Array<string>): void;
@@ -96,6 +102,8 @@ export namespace Spec {
     writtenDate: string,
     content: string,
     thumbnail: string,
+    category: string,
+    url: string,
     pictureurlsList: Array<string>,
   }
 }
