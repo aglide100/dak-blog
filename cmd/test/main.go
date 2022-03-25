@@ -28,8 +28,20 @@ func main() {
 	if err != nil {
 		log.Printf("Can't fetch from git! %v", err)
 	}
+
+	dbConfig := &db.DBConfig{
+		Host : "localhost", 
+		Port : 5432, 
+		User : "table_admin", 
+		Password : "HeLLo!1", 
+		Dbname : "blog", 
+		Sslmode : "", 
+		Sslrootcert : "", 
+		Sslkey : "", 
+		Sslsert : "", 
+	}
 	
-	myDB, err := db.ConnectDB("localhost", 5432, "table_admin", "HeLLo!1", "blog")
+	myDB, err := db.ConnectDB(dbConfig)
 	if err != nil {
 		log.Printf("Can't connect database")
 	}
