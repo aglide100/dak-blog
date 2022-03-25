@@ -48,7 +48,7 @@
     "@zeit/next-typescript": "^1.1.1",
     "autoprefixer": "^10.3.1",
     "axios": "^0.26.1",
-    "create-next-app": "^11.1.0",
+    "create-next-app": "^12.1.1",
     "d3": "^7.3.0",
     "google-protobuf": "^3.17.3",
     "grpc-web": "^1.2.1",
