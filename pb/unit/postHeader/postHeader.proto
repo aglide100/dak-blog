@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package pb.unit.post;
-option go_package = "github.com/aglide100/dak-blog/pb/unit/post";
+package pb.unit.postHeader;
+option go_package = "github.com/aglide100/dak-blog/pb/unit/postHeader";
 
 message PostHeader {
     ID id = 1;
