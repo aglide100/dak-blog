@@ -1,4 +1,4 @@
-package controllers
+package servers
 
 import (
 	"context"
@@ -15,7 +15,7 @@ type PostServer struct {
 	pb_svc.PostServer
 }
 
-func NewPostServiceController(db *db.Database) *PostServer {
+func NewPostServiceServer(db *db.Database) *PostServer {
 	return &PostServer{db: db}
 }
 

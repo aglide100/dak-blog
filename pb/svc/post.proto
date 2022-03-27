@@ -11,6 +11,7 @@ service Post {
     rpc DeletePost(DeletePostReq) returns (DeletePostRes); 
     rpc GetPost(GetPostReq) returns (GetPostRes);
     rpc UpdatePost(UpdatePostReq) returns (UpdatePostRes);
+    rpc QueryPostsHeader() returns (stream unit.post.PostHeader) {} 
 }
 
 message CreatePostReq{
@@ -45,7 +46,6 @@ message GetCommentRes {
     unit.post.Post Comments = 1;
 }
 
-
 message UpdatePostReq {
     unit.post.Post Post = 1;
 }
@@ -53,3 +53,4 @@ message UpdatePostReq {
 message UpdatePostRes {
 // pass
 }
+
