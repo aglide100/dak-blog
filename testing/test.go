@@ -42,9 +42,9 @@ import (
 	pb_unit_postHeader "github.com/aglide100/dak-blog/pb/unit/postHeader"
 )
 
-func getMockPostHeaders() []*pb_unit_postHeader.PostHeader {
-	return PostHeaders
-}
+// func getMockPostHeaders() []*pb_unit_postHeader.PostHeader {
+// 	return PostHeaders
+// }
 
 var PostHeaders = []*pb_unit_postHeader.PostHeader{
 	{
