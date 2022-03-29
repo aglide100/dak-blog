@@ -115,10 +115,16 @@ func (s *PostServer) UpdatePost(ctx context.Context, in *pb_svc.UpdatePostReq) (
 }
 
 func (s *PostServer) QueryPostsHeader(in *svc.QueryPostsHeaderReq, stream pb_svc.Post_QueryPostsHeaderServer) error {
-	stream.SendHeader(metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-stream"))
+	err := stream.SendHeader(metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-stream"))
+	if err != nil {
+		return err
+	}
 
 	for _, postHeaders := range testing.PostHeaders {
-		stream.Send(postHeaders)
+		err = stream.Send(postHeaders)
+		if err != nil {
+			return err
+		}
 	}
 
 	stream.SetTrailer(metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-stream"))
