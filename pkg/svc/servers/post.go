@@ -27,20 +27,37 @@ func (s *PostServer) GetPost(ctx context.Context, in *pb_svc.GetPostReq) (*pb_sv
 	if in != nil {
 		log.Printf("Received: %v", in.GetId().Id)
 	}
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+
+	err := grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
+	if err != nil {
+		return nil, err
+	}
+
+	err = grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+	if err != nil {
+		return nil, err
+	}
 
 	post := &pb_unit_post.Post{Spec: &pb_unit_post.Spec{
 		Title:  "test",
 		Author: "author",
 	}}
+
 	return &pb_svc.GetPostRes{Post: post}, nil
 }
 
 func (s *PostServer) DeletePost(ctx context.Context, in *pb_svc.DeletePostReq) (*pb_svc.DeletePostRes, error) {
 	log.Println("received DeletePost")
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+
+	err := grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
+	if err != nil {
+		return nil, err
+	}
+
+	err = grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+	if err != nil {
+		return nil, err
+	}
 
 	if in == nil {
 		return nil, errors.New("DeletePosReq is nil! please check request")
@@ -51,24 +68,48 @@ func (s *PostServer) DeletePost(ctx context.Context, in *pb_svc.DeletePostReq) (
 
 func (s *PostServer) CreatePost(ctx context.Context, in *pb_svc.CreatePostReq) (*pb_svc.CreatePostRes, error) {
 	log.Println("received CreatePost")
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+
+	err := grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
+	if err != nil {
+		return nil, err
+	}
+
+	err = grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+	if err != nil {
+		return nil, err
+	}
 
 	return &pb_svc.CreatePostRes{}, nil
 }
 
 func (s *PostServer) CreateComment(ctx context.Context, in *pb_svc.CreateCommentReq) (*pb_svc.CreateCommentRes, error) {
 	log.Println("received CreateComment")
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+
+	err := grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
+	if err != nil {
+		return nil, err
+	}
+
+	err = grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+	if err != nil {
+		return nil, err
+	}
 
 	return &pb_svc.CreateCommentRes{}, nil
 }
 
 func (s *PostServer) UpdatePost(ctx context.Context, in *pb_svc.UpdatePostReq) (*pb_svc.UpdatePostRes, error) {
 	log.Println("received UpdatePost")
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+
+	err := grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
+	if err != nil {
+		return nil, err
+	}
+
+	err = grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+	if err != nil {
+		return nil, err
+	}
 
 	return &pb_svc.UpdatePostRes{}, nil
 }
