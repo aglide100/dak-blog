@@ -29,5 +29,8 @@ module.exports = {
     "require-jsdoc": ["off"],
     "space-before-function-paren": ["off"],
     camelcase: ["off"],
+    "max-len": "off",
+    indent: "off",
+    "comma-dangle": "off",
   },
 };

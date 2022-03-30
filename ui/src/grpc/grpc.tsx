@@ -1,10 +1,9 @@
 import * as PostService from "../../gen/pb/svc/post_pb_service";
 // import {PostQueryPostsHeader } from "../../gen/pb/svc/post_pb_service.d"
 import * as pb_unit_post from "../../gen/pb/unit/post/post_pb";
-import * as pb_unit_postHeader from "../../gen/pb/unit/postHeader/postHeader_pb";
+// import * as pb_unit_postHeader from "../../gen/pb/unit/postHeader/postHeader_pb";
 import * as pb_svc_post from "../../gen/pb/svc/post_pb";
 import { grpc } from "@improbable-eng/grpc-web";
-
 
 const USE_TLS= true
 

@@ -1,6 +1,10 @@
 import React from "react";
 import Head from "next/head";
-import { makeGetPostReq, makeCreatePostReq, queryPostHeaders } from "../src/grpc/grpc";
+import {
+  makeGetPostReq,
+  makeCreatePostReq,
+  queryPostHeaders,
+} from "../src/grpc/grpc";
 import * as pb_unit_post from "../gen/pb/unit/post/post_pb";
 
 export default function Home() {
@@ -34,17 +38,15 @@ export default function Home() {
         create CreatePostReq
       </div>
 
-
       <div
         onClick={(ev) => {
           ev.preventDefault();
-         
-          queryPostHeaders()
+
+          queryPostHeaders();
         }}
       >
         create QueryPostsHeadersReq
       </div>
-
     </div>
   );
 }

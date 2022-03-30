@@ -37,8 +37,7 @@ export const Button = ({
           color === "gray" && isDisabled,
         "border-gray-400 bg-gray-400 text-white":
           color === "gray" && !isDisabled,
-        "border-gray-200 bg-white text-gray-700`":
-          color === "white",
+        "border-gray-200 bg-white text-gray-700`": color === "white",
 
         "hover:bg-violet-600 hover:text-white hover:border-violet-600":
           color === "purple" && !isDisabled,

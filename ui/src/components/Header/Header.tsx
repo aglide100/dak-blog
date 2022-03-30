@@ -1,26 +1,25 @@
-import React, {useState} from "react";
-import { Button } from "../atom/Button/Button";
+import React, { useState } from "react";
+// import { Button } from "../atom/Button/Button";
 import classNames from "classnames";
 import Fade from "react-reveal/Fade";
 import { motion } from "framer-motion";
 import { UseGetScrollResultProps } from "../../hooks/useGetScroll";
 
-export type HeaderProps = HeaderReciveProps & UseGetScrollResultProps
+export type HeaderProps = HeaderReciveProps & UseGetScrollResultProps;
 
 type HeaderReciveProps = {
   signIn: () => void;
   signUp: () => void;
   onClickGoToHome: () => void;
-
-}
+};
 const variants = {
   open: (height = 1500) => ({
     clipPath: `circle(${height * 2 + 200}px at calc(100% - 30px) 10px)`,
     transition: {
       type: "spring",
       stiffness: 20,
-      restDelta: 2
-    }
+      restDelta: 2,
+    },
   }),
   closed: {
     clipPath: "circle(30px at calc(100% - 30px) 10px)",
@@ -28,11 +27,10 @@ const variants = {
       delay: 0.01,
       type: "spring",
       stiffness: 400,
-      damping: 40
-    }
-  }
+      damping: 40,
+    },
+  },
 };
-
 
 export function Header(props: HeaderProps) {
   const [isIconClick, setIconClick] = useState<boolean>(false);
@@ -46,9 +44,13 @@ export function Header(props: HeaderProps) {
             "translate-y-0": isIconClick,
             "bg-white": props.scrollY < 100 && !isIconClick,
             "bg-gray-300 bg-opacity-50 -translate-y-4 hover:translate-y-0 hover:bg-white hover:bg-opacity-100":
-              props.scrollY > 100 && props.scrollDirection == "up" && !isIconClick,
+              props.scrollY > 100 &&
+              props.scrollDirection == "up" &&
+              !isIconClick,
             "bg-white translate-y-0 box-border":
-              props.scrollY > 100 && props.scrollDirection == "down" && !isIconClick
+              props.scrollY > 100 &&
+              props.scrollDirection == "down" &&
+              !isIconClick,
           }
         )}
       >
@@ -57,27 +59,30 @@ export function Header(props: HeaderProps) {
             "w-full flex justify-between items-center mt-1 mb-3 transition duration-500 transform items-center",
             {
               "text-black translate-y-0 box-border":
-                isIconClick || (props.scrollY < 100 && props.scrollDirection == "down"),
+                isIconClick ||
+                (props.scrollY < 100 && props.scrollDirection == "down"),
               "text-gray-300 group-hover:text-black hover:translate-y-0":
-                props.scrollY > 100 && props.scrollDirection == "up" && !isIconClick
+                props.scrollY > 100 &&
+                props.scrollDirection == "up" &&
+                !isIconClick,
             }
           )}
         >
           <div
             className={classNames("cursor-pointer w-52", {
               "bg-opacity-50":
-                props.scrollY > 100 && props.scrollDirection == "up" && !isIconClick
+                props.scrollY > 100 &&
+                props.scrollDirection == "up" &&
+                !isIconClick,
             })}
-          >
-           
-          </div>
+          ></div>
 
           <a
             className={classNames(
               "cursor-pointer menu-trigger type12 transform translate-y-3 mr-2 sm:mr-6 z-50",
               {
                 "active-12": isIconClick,
-                "": !isIconClick
+                "": !isIconClick,
               }
             )}
             // href="#"
@@ -87,17 +92,17 @@ export function Header(props: HeaderProps) {
           >
             <span
               className={classNames("bg-black select-none", {
-                "bg-white": isIconClick
+                "bg-white": isIconClick,
               })}
             ></span>
             <span
               className={classNames("bg-black select-none", {
-                "bg-white": isIconClick
+                "bg-white": isIconClick,
               })}
             ></span>
             <span
               className={classNames("bg-black select-none", {
-                "bg-white": isIconClick
+                "bg-white": isIconClick,
               })}
             ></span>
           </a>
@@ -110,9 +115,13 @@ export function Header(props: HeaderProps) {
             {
               "translate-y-0 -right-0": isIconClick,
               "bg-opacity-50 -translate-y-24 hover:translate-y-0 hover:bg-opacity-100 h-100vh":
-                props.scrollY > 100 && props.scrollDirection == "up" && !isIconClick,
+                props.scrollY > 100 &&
+                props.scrollDirection == "up" &&
+                !isIconClick,
               "-translate-y-24 box-border h-110vh ":
-                props.scrollY > 100 && props.scrollDirection == "down" && !isIconClick
+                props.scrollY > 100 &&
+                props.scrollDirection == "down" &&
+                !isIconClick,
             }
           )}
           variants={variants}
@@ -136,7 +145,7 @@ export function Header(props: HeaderProps) {
         </motion.div>
       </motion.nav>
     </div>
-    
+
     // <nav className="w-screen h-12 shadow-sm ">
     //   <div className="flex justify-between items-center">
     //     <div
@@ -160,7 +169,7 @@ export function Header(props: HeaderProps) {
     //               }}>
     //           Sign In
     //         </Button>
-          
+
     //       </div>
     //       <div className="mr-4">
     //         <button
