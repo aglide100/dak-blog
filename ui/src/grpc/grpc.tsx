@@ -1,8 +1,9 @@
 import * as PostService from "../../gen/pb/svc/post_pb_service";
+// import {PostQueryPostsHeader } from "../../gen/pb/svc/post_pb_service.d"
 import * as pb_unit_post from "../../gen/pb/unit/post/post_pb";
+// import * as pb_unit_postHeader from "../../gen/pb/unit/postHeader/postHeader_pb";
 import * as pb_svc_post from "../../gen/pb/svc/post_pb";
 import { grpc } from "@improbable-eng/grpc-web";
-
 
 const USE_TLS= true
 
@@ -32,6 +33,31 @@ export function makeGetPostReq(postId: string) {
       console.log("getPost.onEnd.trailers", trailers);
     },
   });
+}
+
+export function queryPostHeaders() {
+  const queryPostsHeaderReq = new pb_svc_post.QueryPostsHeaderReq()
+  
+
+  const client = grpc.client(PostService.Post.QueryPostsHeader, {
+    host: grpcHost,
+  });
+
+  client.onHeaders((headers: grpc.Metadata) => {
+    console.log("queryPosts.onHeaders", headers);
+  })
+
+  client.onMessage((message:any ) => {
+    console.log("queryPosts.onMessage", message.toObject());
+  })
+
+  client.onEnd((code: grpc.Code, msg: string, trailers: grpc.Metadata) => {
+    console.log("queryPosts.onEnd", code, msg, trailers);
+  })
+
+  client.start();
+  client.send(queryPostsHeaderReq)
+
 }
 
 export function makeCreatePostReq(newPost: pb_unit_post.Post) {
