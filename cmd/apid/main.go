@@ -16,13 +16,18 @@ import (
 
 	pb_svc "github.com/aglide100/dak-blog/pb/svc"
 	"github.com/aglide100/dak-blog/pkg/db"
-	"github.com/aglide100/dak-blog/pkg/svc/controllers"
+	"github.com/aglide100/dak-blog/pkg/svc/servers"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	"golang.org/x/sync/errgroup"
 	"github.com/joho/godotenv"
+	"golang.org/x/sync/errgroup"
 )
 
-
+var (
+	gRPCWebAddr = flag.String("grpc.addr", "0.0.0.0:10112", "grpc address")
+	usingTls = flag.Bool("grpc.tls", true, "using http2")
+	serverCrt = flag.String("cert.crt", "keys/server.crt", "crt file location")
+	serverKey = flag.String("cert.key", "keys/server.key", "ket file location")
+)
 
 func main() {
 	err := godotenv.Load(".env")
@@ -37,19 +42,7 @@ func main() {
 	}
 }
 
-
 func realMain() error {
-	dbAddr := os.Getenv("DB_ADDR")
-	dbPort := os.Getenv("DB_PORT")
-	dbUser := os.Getenv("DB_USER")
-	dbPasswd := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
-	
-	gRPCWebAddr := flag.String("grpc.addr", "0.0.0.0:10112", "grpc address")
-	usingTls := flag.Bool("grpc.tls", true, "using http2")
-	serverCrt := flag.String("cert.crt", "keys/server.crt", "crt file location")
-	serverKey := flag.String("cert.key", "keys/server.key", "ket file location")
-
 	gRPCWebAddrL, err := net.Listen("tcp", *gRPCWebAddr)
 	if err != nil {
 		return err
@@ -71,19 +64,37 @@ func realMain() error {
 		opts = append(opts, grpc.Creds(creds))
 	}
 
+	dbAddr := os.Getenv("DB_ADDR")
+	dbPort := os.Getenv("DB_PORT")
+	dbUser := os.Getenv("DB_USER")
+	dbPasswd := os.Getenv("DB_PASSWORD")
+	dbName := os.Getenv("DB_NAME")
+
 	dbport, err := strconv.Atoi(dbPort)
 	if err != nil {
 		return fmt.Errorf("Can't read dbPort!: %v %v", dbPort, err)
 	}
+	// log.Printf("%v", dbName)
 	
-	myDB, err := db.ConnectDB(dbAddr, dbport, dbUser, dbPasswd, dbName)
+	myDB, err := db.ConnectDB(&db.DBConfig{
+		Host : dbAddr, 
+		Port : dbport, 
+		User : dbUser, 
+		Password : dbPasswd, 
+		Dbname : dbName, 
+		Sslmode : "disable", 
+		// Sslmode : "verify-full", 
+		// Sslrootcert : "keys/ca.crt", 
+		// Sslkey : "keys/client.key", 
+		// Sslsert : "keys/client.crt", 
+	})
 	if err != nil {
 		return fmt.Errorf("Can't connect DB: %v", err)
 	}
 
-	postSrv := controllers.NewPostServiceController(myDB)
-	accountSrv := controllers.NewAccountServiceController()
-	commentSrv := controllers.NewCommentServiceController()
+	postSrv := servers.NewPostServiceServer(myDB)
+	accountSrv := servers.NewAccountServiceServer()
+	commentSrv := servers.NewCommentServiceServer()
 	grpcServer := grpc.NewServer(opts...)
 	
 	pb_svc.RegisterPostServer(grpcServer, postSrv)

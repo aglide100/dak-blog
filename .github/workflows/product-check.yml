@@ -9,50 +9,49 @@ permissions:
   contents: read
 
 jobs:
-  go_ci:
-    strategy:
-      matrix:
-        go-version: [1.15.x, 1.13x]
-        os: [macos-latest, ubuntu-latest]
+  go-ci:
     name: lint
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v2
-      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - uses: actions/checkout@v3
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+        uses: golangci/golangci-lint-action@v3
         with:
-          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
           version: v1.29
+          skip-go-installation: true
+          args: --version
 
-  node_storybook_ci:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [15.x, 16.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-        working-directory: ui/
-      - run: npm run build-storybook --if-present
-        working-directory: ui/
+  # node_storybook_ci:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [15.x, 16.x]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - run: npm ci
+  #       working-directory: ui/
+  #     - run: npm run build-storybook --if-present
+  #       working-directory: ui/
 
-  node_react_ci:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [15.x, 16.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-        working-directory: ui/
-      - run: npm run build --if-present
-        working-directory: ui/
+  # node_react_ci:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [15.x, 16.x]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - run: npm ci
+  #       working-directory: ui/
+  #     - run: npm run build --if-present
+  #       working-directory: ui/

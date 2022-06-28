@@ -3,6 +3,7 @@
 
 import * as jspb from "google-protobuf";
 import * as pb_unit_post_post_pb from "../../pb/unit/post/post_pb";
+import * as pb_unit_postHeader_postHeader_pb from "../../pb/unit/postHeader/postHeader_pb";
 
 export class CreatePostReq extends jspb.Message {
   hasPost(): boolean;
@@ -208,6 +209,22 @@ export class UpdatePostRes extends jspb.Message {
 }
 
 export namespace UpdatePostRes {
+  export type AsObject = {
+  }
+}
+
+export class QueryPostsHeaderReq extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): QueryPostsHeaderReq.AsObject;
+  static toObject(includeInstance: boolean, msg: QueryPostsHeaderReq): QueryPostsHeaderReq.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: QueryPostsHeaderReq, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): QueryPostsHeaderReq;
+  static deserializeBinaryFromReader(message: QueryPostsHeaderReq, reader: jspb.BinaryReader): QueryPostsHeaderReq;
+}
+
+export namespace QueryPostsHeaderReq {
   export type AsObject = {
   }
 }

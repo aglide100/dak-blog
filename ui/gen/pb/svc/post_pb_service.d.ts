@@ -2,6 +2,7 @@
 // file: pb/svc/post.proto
 
 import * as pb_svc_post_pb from "../../pb/svc/post_pb";
+import * as pb_unit_postHeader_postHeader_pb from "../../pb/unit/postHeader/postHeader_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type PostCreatePost = {
@@ -40,12 +41,22 @@ type PostUpdatePost = {
   readonly responseType: typeof pb_svc_post_pb.UpdatePostRes;
 };
 
+type PostQueryPostsHeader = {
+  readonly methodName: string;
+  readonly service: typeof Post;
+  readonly requestStream: false;
+  readonly responseStream: true;
+  readonly requestType: typeof pb_svc_post_pb.QueryPostsHeaderReq;
+  readonly responseType: typeof pb_unit_postHeader_postHeader_pb.PostHeader;
+};
+
 export class Post {
   static readonly serviceName: string;
   static readonly CreatePost: PostCreatePost;
   static readonly DeletePost: PostDeletePost;
   static readonly GetPost: PostGetPost;
   static readonly UpdatePost: PostUpdatePost;
+  static readonly QueryPostsHeader: PostQueryPostsHeader;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -116,5 +127,6 @@ export class PostClient {
     requestMessage: pb_svc_post_pb.UpdatePostReq,
     callback: (error: ServiceError|null, responseMessage: pb_svc_post_pb.UpdatePostRes|null) => void
   ): UnaryResponse;
+  queryPostsHeader(requestMessage: pb_svc_post_pb.QueryPostsHeaderReq, metadata?: grpc.Metadata): ResponseStream<pb_unit_postHeader_postHeader_pb.PostHeader>;
 }
 

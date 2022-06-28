@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	pb_unit_post "github.com/aglide100/dak-blog/pb/unit/post"
 	"github.com/aglide100/dak-blog/pkg/models"
@@ -23,8 +24,6 @@ type DB interface {
 	WritePost(post *pb_unit_post.Post) (error)
 	UpdatePost(post *pb_unit_post.Post, id int64) (error)
 	// github file
-
-	
 }
 
 type Database struct {
@@ -32,14 +31,27 @@ type Database struct {
 	GitDB
 }
 
+type DBConfig struct {
+	Host string 
+	Port int 
+	User string 
+	Password string 
+	Dbname string 
+	Sslmode string 
+	Sslrootcert string 
+	Sslkey string 
+	Sslsert string
+}
 
-func ConnectDB(host string, port int, user string, password string, dbname string) (*Database, error) {
-	psqInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+
+func ConnectDB(config *DBConfig) (*Database, error) {
+	psqInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
+	config.Host, config.Port, config.User, config.Password, config.Dbname, config.Sslmode)
+	log.Printf("Db config :%v", psqInfo)
 
 	db, err := sql.Open("postgres", psqInfo)
 	if err != nil {
-		return nil, fmt.Errorf("connecting to db: %v", err)
+		return nil, err
 	}
 	
 	err = db.Ping()

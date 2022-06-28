@@ -1,9 +1,15 @@
-import { Post } from "../../gen/pb/svc/post_pb_service";
+import * as PostService from "../../gen/pb/svc/post_pb_service";
+// import {PostQueryPostsHeader } from "../../gen/pb/svc/post_pb_service.d"
 import * as pb_unit_post from "../../gen/pb/unit/post/post_pb";
+// import * as pb_unit_postHeader from "../../gen/pb/unit/postHeader/postHeader_pb";
 import * as pb_svc_post from "../../gen/pb/svc/post_pb";
 import { grpc } from "@improbable-eng/grpc-web";
 
-const grpcHost = "https://localhost:10112";
+const USE_TLS= true
+
+// console.log("tls: ", process.env.TLS)
+
+const grpcHost = USE_TLS ? "https://localhost:10112" : "http://localhost:10112";
 
 export function makeGetPostReq(postId: string) {
   const getPostReq = new pb_svc_post.GetPostReq();
@@ -12,13 +18,14 @@ export function makeGetPostReq(postId: string) {
   id.setUuid(postId);
   post.setId(id);
   getPostReq.setId(post);
-  grpc.unary(Post.GetPost, {
+  grpc.unary(PostService.Post.GetPost, {
     request: getPostReq,
     host: grpcHost,
     onEnd: (res) => {
       const { status, statusMessage, headers, message, trailers } = res;
       console.log("getPost.onEnd.status", status, statusMessage);
       console.log("getPost.onEnd.headers", headers);
+
       if (status === grpc.Code.OK && message) {
         console.log("getPost.onEnd.message", message.toObject());
       }
@@ -28,10 +35,35 @@ export function makeGetPostReq(postId: string) {
   });
 }
 
+export function queryPostHeaders() {
+  const queryPostsHeaderReq = new pb_svc_post.QueryPostsHeaderReq()
+  
+
+  const client = grpc.client(PostService.Post.QueryPostsHeader, {
+    host: grpcHost,
+  });
+
+  client.onHeaders((headers: grpc.Metadata) => {
+    console.log("queryPosts.onHeaders", headers);
+  })
+
+  client.onMessage((message:any ) => {
+    console.log("queryPosts.onMessage", message.toObject());
+  })
+
+  client.onEnd((code: grpc.Code, msg: string, trailers: grpc.Metadata) => {
+    console.log("queryPosts.onEnd", code, msg, trailers);
+  })
+
+  client.start();
+  client.send(queryPostsHeaderReq)
+
+}
+
 export function makeCreatePostReq(newPost: pb_unit_post.Post) {
   const creatPostReq = new pb_svc_post.CreatePostReq();
   creatPostReq.setPost(newPost);
-  grpc.unary(Post.CreatePost, {
+  grpc.unary(PostService.Post.CreatePost, {
     request: creatPostReq,
     host: grpcHost,
     onEnd: (res) => {
@@ -56,7 +88,7 @@ export function makeDeletePostReq(postId: string) {
   post.setId(id);
 
   deletePostReq.setId(post);
-  grpc.unary(Post.DeletePost, {
+  grpc.unary(PostService.Post.DeletePost, {
     request: deletePostReq,
     host: grpcHost,
     onEnd: (res) => {

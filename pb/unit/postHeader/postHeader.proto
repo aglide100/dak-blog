@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package pb.unit.postHeader;
+option go_package = "github.com/aglide100/dak-blog/pb/unit/postHeader";
+
+message PostHeader {
+    ID id = 1;
+    Spec spec = 2;
+}
+
+message ID {
+    string uuid =1;
+}
+
+message Spec {
+    string title = 1;
+    string author = 2;
+    string written_date = 3;
+    string category = 4;
+    string url = 5;
+}
