@@ -9,21 +9,20 @@ permissions:
   contents: read
 
 jobs:
-  go_ci:
-    strategy:
-      matrix:
-        go-version: [1.15.x, 1.13x]
-        os: [macos-latest, ubuntu-latest]
+  go-ci:
     name: lint
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v2
-      - uses: actions/checkout@v2
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+      - uses: actions/setup-go@v3
         with:
-          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+          go-version: 1.18
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
           version: v1.29
+          skip-go-installation: true
+          args: --version
 
   node_storybook_ci:
     runs-on: ubuntu-latest
