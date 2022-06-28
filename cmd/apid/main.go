@@ -18,8 +18,8 @@ import (
 	"github.com/aglide100/dak-blog/pkg/db"
 	"github.com/aglide100/dak-blog/pkg/svc/servers"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	"golang.org/x/sync/errgroup"
 	"github.com/joho/godotenv"
+	"golang.org/x/sync/errgroup"
 )
 
 var (
