@@ -8,7 +8,7 @@ COPY . .
 
 RUN npm install expo-cli -g
 
-RUN npm install --no-optional
+RUN npm install --lecacy--peer-deps
 
 RUN npm run build -prod
 
