@@ -1,24 +1,19 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
-  extends: ["plugin:react/recommended", "google"],
+  extends: ["plugin:react/recommended", "google", "plugin:storybook/recommended"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: "module"
   },
   plugins: ["react", "@typescript-eslint", "react-hooks"],
-  ignorePatterns: [
-    "gen/pb/svc/*.js",
-    "gen/pb/svc/*.ts",
-    "gen/pb/unit/**/*.js",
-    "gen/pb/unit/**/*.js",
-  ],
+  ignorePatterns: ["gen/pb/svc/*.js", "gen/pb/svc/*.ts", "gen/pb/unit/**/*.js", "gen/pb/unit/**/*.js"],
   rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
@@ -31,6 +26,6 @@ module.exports = {
     camelcase: ["off"],
     "max-len": "off",
     indent: "off",
-    "comma-dangle": "off",
-  },
+    "comma-dangle": "off"
+  }
 };
