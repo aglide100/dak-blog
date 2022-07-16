@@ -7,21 +7,21 @@ on:
 
 jobs:
   node-ci:
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      node: [14, 16, 18]
-  name: Node ${{ matrix.node }} ci
-  steps:
-    - uses: actions/checkout@v3
-    - name: Setup node
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node }}
-    - run: npm ci
-      working-directory: ui/
-    - run: npm run build
-      working-directory: ui/
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14, 16, 18]
+    name: Node ${{ matrix.node }} ci
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+        working-directory: ui/
+      - run: npm run build
+        working-directory: ui/
   build_docker_image_node:
     runs-on: ubuntu-latest
     needs:

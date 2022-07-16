@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
- go-ci:
+  go-ci:
     name: lint
     runs-on: ubuntu-latest
     steps:
