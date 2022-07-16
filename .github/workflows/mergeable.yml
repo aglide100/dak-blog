@@ -1,57 +1,57 @@
 name: Check mergeable
 
 on:
-    push:
-        branches: [master]
-    pull_request:
-        branches: [master]
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    go-ci:
-        name: lint
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/setup-go@v3
-              with:
-                  go-version: 1.18
-            - uses: actions/checkout@v3
-            - name: golangci-lint
-              uses: golangci/golangci-lint-action@v3
-              with:
-                  version: v1.29
-                  skip-go-installation: true
-                  args: --version
+  go-ci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.29
+          skip-go-installation: true
+          args: --version
 
-    node-ci:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node: [14, 16, 18]
-        name: Node ${{ matrix.node }} ci
-        steps:
-            - uses: actions/checkout@v3
-            - name: Setup node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: ${{ matrix.node }}
-            - run: npm ci
-              working-directory: ui/
-            - run: npm build
-              working-directory: ui/
-    # node_storybook_ci:
-    #   runs-on: ubuntu-latest
-    #   strategy:
-    #     matrix:
-    #       node-version: [15.x, 16.x]
-    #   steps:
-    #     - uses: actions/checkout@v2
-    #     - name: Use Node.js ${{ matrix.node-version }}
-    #       uses: actions/setup-node@v1
-    #       with:
-    #         node-version: ${{ matrix.node-version }}
-    #     - run: npm ci
-    #       working-directory: ui/
-    #     - run: npm run build-storybook --if-present
-    #       working-directory: ui/
+  node-ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14, 16, 18]
+    name: Node ${{ matrix.node }} ci
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+        working-directory: ui/
+      - run: npm run build
+        working-directory: ui/
+  # node_storybook_ci:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [15.x, 16.x]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - run: npm ci
+  #       working-directory: ui/
+  #     - run: npm run build-storybook --if-present
+  #       working-directory: ui/
