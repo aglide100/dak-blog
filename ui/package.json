@@ -44,7 +44,7 @@
   "dependencies": {
     "@craco/craco": "^6.4.5",
     "@grpc/grpc-js": "^1.6.7",
-    "@grpc/proto-loader": "^0.6.13",
+    "@grpc/proto-loader": "^0.7.0",
     "@improbable-eng/grpc-web": "^0.15.0",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@types/classnames": "^2.3.0",
