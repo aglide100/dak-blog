@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/improbable-eng/grpc-web v0.15.0
-	github.com/joho/godotenv v1.4.0
+	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.6
 	github.com/tidwall/gjson v1.14.3
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
